@@ -1,0 +1,4 @@
+--type-add=ruby=.haml,.rake,.feature
+--type-add=css=.less,.sass
+--type-add=js=.coffee
+--smart-case
