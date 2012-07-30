@@ -1,4 +1,10 @@
---type-add=ruby=.haml,.rake,.feature
+--type-add=html=.erb,.haml
 --type-add=css=.less,.sass
 --type-add=js=.coffee
+--type-set=erb=.erb
+--type-set=haml=.haml
+--type-set=sass=.sass,.scss
+--type-set=less=.less
+--type-set=logs=.log
+--type-set=cucumber=.feature
 --smart-case
