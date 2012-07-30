@@ -1,15 +1,8 @@
 #!/bin/bash
 
-export DIFF=vimdiff
-export EDITOR=vim
-
-if which vimpager > /dev/null 2>&1; then
-   export PAGER=vimpager
-elif which most > /dev/null 2>&1; then
-   export PAGER=most
-else
-   export PAGER='less -R'
-fi
+export DIFF='opendiff'
+export EDITOR='mate -w'
+export PAGER='less -R'
 
 # Make less more friendly for non-text input files, see lesspipe(1)
 [ -x /usr/bin/lesspipe ] && eval "$(SHELL=/bin/sh lesspipe)"
