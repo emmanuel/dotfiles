@@ -8,10 +8,14 @@ cat <<EOF
 [user]
     name = $GIT_NAME
     email = $GIT_EMAIL
+[core]
+    excludesfile = $HOME/.gitignore
+    editor = mate -w
 [color]
     diff = auto
     status = auto
     branch = auto
+    interactive = auto
 [alias]
     st = status
     ci = commit
@@ -24,6 +28,9 @@ cat <<EOF
     dfnp  = !git --no-pager diff
 [github]
     user = $GITHUB_USER
+    token = !security 2>&1 >/dev/null find-generic-password -gs \"Github API Token\" | ruby -e 'print $1 if STDIN.gets =~ /^password: \\\"(.*)\\\"$/'
+[merge]
+    tool = opendiff
 [credential]
     helper = cache --timeout=3600
 EOF
