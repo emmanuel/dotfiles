@@ -1,1 +1,39 @@
+TM_GIT                = "/usr/local/bin/git"
+
+# fontName            = "Inconsolata-dz"
+# fontName            = "DejaVu Sans Mono"
+# fontSize            = 15
+fontName              = "Monaco"
+fontSize              = 13
+
+windowTitle           = "$TM_DISPLAYNAME${TM_DIRECTORY/\A(?:\/Users\/emmanuel\w+\/?(.*)|(.+))\z/${2:? – ${2/\A\/Users\/emmanuel/~/}:${1/\A(?=.)/ – /}}/}"
+
+tabSize               = 2
+softTabs              = true
+# wrapColumn            = 80
+# wrapColumn            = "Use Window Frame" # choose one
+softWrap              = false
+showInvisibles        = true
+
+exclude               = "{log/*.log,tmp/cache/*}"
+excludeDirectories    = "{tmp/cache,tmp/capybara}"
+excludeInFolderSearch = ""
+excludeInFileChooser  = "{$exclude,*.}"
+# exclude, excludeFiles, excludeDirectories, excludeInBrowser, excludeInFolderSearch, excludeInFileChooser, excludeFilesInBrowser
+
+[ target ]
+fileType              = "source.tm-properties"
+
+# special per-filetype rules can be specified like so:
+[ *.{txt,md,mdown,markdown} ]
+spellChecking         = true
+# tabSize               = 4
+
+[ .git/COMMIT_EDITMSG ]
+softWrap              = true
+spellChecking         = true
+spellingLanguage      = 'en'
+
+# [ *_spec.rb ]
+# fileType              = "source.ruby.rspec"
 
