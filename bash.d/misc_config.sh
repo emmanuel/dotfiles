@@ -15,3 +15,7 @@ shopt -s cdable_vars
 # values of LINES and COLUMNS.
 shopt -s checkwinsize
 
+# Start typing a command at a shell prompt, then hit up/down for history search
+# using the inputted text as the beginning of the search string
+bind '"\e[A": history-search-backward'
+bind '"\e[B": history-search-forward'
