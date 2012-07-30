@@ -99,14 +99,6 @@ delfrompath()
 ##############################################################################
 # }}}
 
-# Add my admin scripts to the path
-pathprepend "$DADMIN/scripts"
-pathprepend "$DOTHER/run/bin"
+pathprepend "/usr/local/bin"
 pathprepend "$HOME/.bin"
-
-# Add user's Cabal binaries to the path
-pathprepend "$HOME/.cabal/bin/"
-
-pathprepend "$DDROPBOX/todo"
-
-
+pathappend "$HOME/.rvm/bin" # Add RVM to PATH for scripting
