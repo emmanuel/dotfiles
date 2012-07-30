@@ -22,4 +22,3 @@ source_dir()
 source_dir ~/.bash.d/local/before
 source_dir ~/.bash.d
 source_dir ~/.bash.d/local/after
-
