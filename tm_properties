@@ -8,6 +8,14 @@ fontSize              = 13
 
 windowTitle           = "$TM_DISPLAYNAME${TM_DIRECTORY/\A(?:\/Users\/emmanuel\w+\/?(.*)|(.+))\z/${2:? – ${2/\A\/Users\/emmanuel/~/}:${1/\A(?=.)/ – /}}/}"
 
+include               = "{$include,.rspec,.env}"
+exclude               = "{$exclude,tmp/cache*,tmp/capybara*}"
+excludeDirectories    = "{$excludeDirectories,tmp/cache,tmp/capybara}"
+excludeInFolderSearch = "{$excludeInFolderSearch,log/*.log}"
+# excludeInFolderSearch = ""
+# excludeInFileChooser  = "{$exclude,*.}"
+# exclude, excludeFiles, excludeDirectories, excludeInBrowser, excludeInFolderSearch, excludeInFileChooser, excludeFilesInBrowser
+
 [ attr.file.unknown-type ]
 fileType              = "text.plain"
 
@@ -19,11 +27,6 @@ softTabs              = true
 softWrap              = false
 showInvisibles        = true
 
-exclude               = "{log/*.log,tmp/cache/*}"
-excludeDirectories    = "{tmp/cache,tmp/capybara}"
-excludeInFolderSearch = ""
-excludeInFileChooser  = "{$exclude,*.}"
-# exclude, excludeFiles, excludeDirectories, excludeInBrowser, excludeInFolderSearch, excludeInFileChooser, excludeFilesInBrowser
 
 [ target ]
 fileType              = "source.tm-properties"
