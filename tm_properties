@@ -24,6 +24,9 @@ excludeInFileChooser  = "{$exclude,*.}"
 [ target ]
 fileType              = "source.tm-properties"
 
+[ attr.file.unknown-type ]
+fileType = text
+
 # special per-filetype rules can be specified like so:
 [ *.{txt,md,mdown,markdown} ]
 spellChecking         = true
@@ -36,4 +39,3 @@ spellingLanguage      = 'en'
 
 # [ *_spec.rb ]
 # fileType              = "source.ruby.rspec"
-
