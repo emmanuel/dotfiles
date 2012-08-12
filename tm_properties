@@ -8,6 +8,10 @@ fontSize              = 13
 
 windowTitle           = "$TM_DISPLAYNAME${TM_DIRECTORY/\A(?:\/Users\/emmanuel\w+\/?(.*)|(.+))\z/${2:? – ${2/\A\/Users\/emmanuel/~/}:${1/\A(?=.)/ – /}}/}"
 
+[ attr.file.unknown-type ]
+fileType              = "text.plain"
+
+[ source ]
 tabSize               = 2
 softTabs              = true
 # wrapColumn            = 80
@@ -23,9 +27,6 @@ excludeInFileChooser  = "{$exclude,*.}"
 
 [ target ]
 fileType              = "source.tm-properties"
-
-[ attr.file.unknown-type ]
-fileType = text
 
 # special per-filetype rules can be specified like so:
 [ *.{txt,md,mdown,markdown} ]
