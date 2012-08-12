@@ -38,5 +38,5 @@ softWrap              = true
 spellChecking         = true
 spellingLanguage      = 'en'
 
-# [ *_spec.rb ]
-# fileType              = "source.ruby.rspec"
+[ *_spec.rb ]
+scopeAttributes       = "source.ruby.rspec"
