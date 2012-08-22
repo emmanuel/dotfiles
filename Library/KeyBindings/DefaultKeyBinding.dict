@@ -35,4 +35,29 @@
     "^x"    = ("insertText:", "\U238B");  // ⌃X     escape
     "x"     = ("insertText:", "\U23CF");  // X      eject
   };
+
+  "^@s" = {   // surround commands: two-stroke bindings starting with ⌘⌃S
+    // wrap () with spaces
+    "(" = (delete:, insertText:, "( ", yank:, insertText:, " ", moveLeft:, insertText:, " )", deleteForward:);
+    // wrap () no spaces
+    ")" = (delete:, insertText:, "( ", deleteBackward:, yank:, insertText:, " ", moveLeft:, insertText:, ")", deleteForward:);
+    // wrap [] with spaces
+    "[" = (delete:, insertText:, "[ ", yank:, insertText:, " ", moveLeft:, insertText:, " ]", deleteForward:);
+    // wrap [] no spaces
+    "]" = (delete:, insertText:, "[ ", deleteBackward:, yank:, insertText:, " ", moveLeft:, insertText:, "]", deleteForward:);
+    // wrap {} with spaces
+    "{" = (delete:, insertText:, "{ ", yank:, insertText:, " ", moveLeft:, insertText:, " }", deleteForward:);
+    // wrap {} no spaces
+    "}" = (delete:, insertText:, "{ ", deleteBackward:, yank:, insertText:, " ", moveLeft:, insertText:, "}", deleteForward:);
+    // wrap <> with spaces
+    "<" = (delete:, insertText:, "< ", yank:, insertText:, " ", moveLeft:, insertText:, " >", deleteForward:);
+    // wrap <> no spaces
+    ">" = (delete:, insertText:, "< ", deleteBackward:, yank:, insertText:, " ", moveLeft:, insertText:, ">", deleteForward:);
+    // wrap single quotes
+    "'" = (delete:, insertText:, "' ", deleteBackward:, yank:, insertText:, " ", moveLeft:, insertText:, "'", deleteForward:);
+    // wrap backticks
+    "`" = (delete:, insertText:, "` ", deleteBackward:, yank:, insertText:, " ", moveLeft:, insertText:, "`", deleteForward:);
+    // wrap double quote
+    "\"" = (delete:, insertText:, "\" ", deleteBackward:, yank:, insertText:, " ", moveLeft:, insertText:, "\"", deleteForward:);
+  };
 }
