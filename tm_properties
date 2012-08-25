@@ -6,7 +6,7 @@ TM_GIT                = "/usr/local/bin/git"
 fontName              = "Monaco"
 fontSize              = 13
 
-windowTitle           = "$TM_DISPLAYNAME${TM_DIRECTORY/\A(?:\/Users\/emmanuel\w+\/?(.*)|(.+))\z/${2:? – ${2/\A\/Users\/emmanuel/~/}:${1/\A(?=.)/ – /}}/} [${TM_SCM_BRANCH:-none}]"
+windowTitle           = "$TM_DISPLAYNAME${TM_DIRECTORY/\A(?:\/Users\/emmanuel\w+\/?(.*)|(.+))\z/${2:? – ${2/\A\/Users\/emmanuel/~/}:${1/\A(?=.)/ – /}}/} (${TM_SCM_BRANCH:-none})"
 
 include               = "{$include,.rspec,.env}"
 exclude               = "{$exclude,tmp/cache*,tmp/capybara*}"
