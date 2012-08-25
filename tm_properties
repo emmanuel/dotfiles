@@ -1,3 +1,4 @@
+rvm_bin_path          = "$HOME/.rvm/bin"
 TM_GIT                = "/usr/local/bin/git"
 
 # fontName            = "Inconsolata-dz"
