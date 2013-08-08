@@ -19,6 +19,7 @@ source_dir()
     fi
 }
 
+source_dir /usr/local/etc/bash_completion.d
 source_dir ~/.bash.d/local/before
 source_dir ~/.bash.d
 source_dir ~/.bash.d/local/after
