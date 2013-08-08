@@ -1,6 +1,8 @@
 #!/bin/bash
 
 # bash_prompt (mainly) from: https://github.com/necolas/dotfiles
+# with further inspiration from:
+# http://www.terminally-incoherent.com/blog/2013/01/14/whats-in-your-bash-prompt/
 
 # Example:
 # nicolas@host: ~/.dotfiles on master[+!?$]
@@ -39,7 +41,9 @@ style_user="\[${RESET}${SOLAR_ORANGE}\]"
 style_host="\[${RESET}${SOLAR_YELLOW}\]"
 style_path="\[${RESET}${SOLAR_GREEN}\]"
 style_chars="\[${RESET}${SOLAR_WHITE}\]"
-style_branch="${SOLAR_CYAN}"
+style_status_clean="\[${RESET}${SOLAR_GREEN}\]"
+style_status_nonzero="\[${RESET}${SOLAR_RED}\]"
+style_branch="\[${SOLAR_CYAN}\]"
 
 if [[ "$SSH_TTY" ]]; then
     # connected via ssh
@@ -72,7 +76,7 @@ get_git_branch() {
 
 # Git status information
 prompt_git() {
-    local git_info git_state uncommitted unstaged untracked stashed
+    local git_info git_info_colorized git_state uncommitted unstaged untracked stashed
 
     if ! is_git_repo || is_git_dir; then
         return 1
@@ -104,22 +108,35 @@ prompt_git() {
 
     # Combine the branch name and state information
     if [[ $git_state ]]; then
-        git_info="$git_info[$git_state]"
+        git_info="${git_info}[${git_state}]"
     fi
 
-    printf " ${style_branch}${git_info}"
+    printf "${git_info}"
 }
 
+# set up command prompt
+function __prompt_command()
+{
+    # capture the exit status of the last command
+    EXIT="$?"
+    # Set the terminal title to the current working directory
+    PS1="\[\033]0;\w\007\]"
 
-# Set the terminal title to the current working directory
-PS1="\[\033]0;\w\007\]"
-# Build the prompt
-# PS1+="\n" # Newline
-PS1+="${style_user}\u" # Username
-PS1+="${style_chars}@" # @
-PS1+="${style_host}\h" # Host
-PS1+="${style_chars}: " # :
-PS1+="${style_path}\w" # Working directory
-PS1+="\$(prompt_git)" # Git details
-# PS1+="\n" # Newline
-PS1+="${style_chars}\$ \[${RESET}\]" # $ (and reset color)
+    # Build the prompt
+    if [ $EXIT -eq 0 ]; then
+      PS1+="[${style_status_clean}\!\[${RESET}\]] "
+    else
+      PS1+="[${style_status_nonzero}\!\[${RESET}\]] "
+    fi
+    # PS1+="\n" # Newline
+    PS1+="${style_user}\u" # Username
+    PS1+="${style_chars}@" # @
+    PS1+="${style_host}\h" # Host
+    PS1+="${style_chars}: " # :
+    PS1+="${style_path}\w" # Working directory
+    PS1+="${style_branch}$(prompt_git)\[${RESET}\]" # Git details
+    # PS1+="\n" # Newline
+    PS1+="${style_chars}\$ \[${RESET}\]" # $ (and reset color)
+}
+
+PROMPT_COMMAND=__prompt_command
