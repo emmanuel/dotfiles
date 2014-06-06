@@ -1,4 +1,4 @@
-# westcave Dot Files
+# Dot Files
 
 These are the configuration files I want to have in every Linux box I use.
 
