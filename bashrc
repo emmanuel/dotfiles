@@ -3,6 +3,15 @@
 # If not running interactively, don't do anything
 [ -z "$PS1" ] && return
 
+source_file()
+{
+    local conf_file="$1"
+    if [[ -f $conf_file && $(basename $conf_file) != 'README' ]]
+    then
+        source "$conf_file"
+    fi
+}
+
 source_dir()
 {
     local dir="$1"
@@ -11,10 +20,7 @@ source_dir()
         local conf_file
         for conf_file in "$dir"/*
         do
-            if [[ -f $conf_file && $(basename $conf_file) != 'README' ]]
-            then
-                source "$conf_file"
-            fi
+            source_file $conf_file
         done
     fi
 }
