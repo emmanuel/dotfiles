@@ -10,11 +10,3 @@ if [ -n "$BASH_VERSION" ]; then
      . "$HOME/.bashrc"
    fi
 fi
-
-# include path to .dotfiles scripts
-PATH="$HOME/.bin:$PATH"
-
-# include path to user bin if it exists 
-if [ -d "$HOME/bin" ] ; then
-    PATH="$HOME/bin:$PATH"
-fi
