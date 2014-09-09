@@ -3,6 +3,8 @@
 alias urlencode='python -c "import sys, urllib as ul; print ul.quote_plus(sys.argv[1])"'
 alias urldecode='python -c "import sys, urllib as ul; print ul.unquote_plus(sys.argv[1])"'
 
+alias srvhttp='twistd -n web -p ${PORT:-8888} --path .'
+
 alias vish='vim $DBASH'
 alias gvish='gvim $DBASH'
 alias reloadsh='source $HOME/.bashrc'
