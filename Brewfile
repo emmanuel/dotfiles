@@ -8,6 +8,7 @@ brew 'bash-completion'
 # brew 'postgresql'
 brew 'hub'
 brew 'kubernetes-cli'
+brew 'go'
 
 tap 'caskroom/cask'
 cask 'launchbar'
