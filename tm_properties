@@ -9,8 +9,8 @@ fontSize              = 13
 
 windowTitle           = "$TM_DISPLAYNAME${TM_DIRECTORY/\A(?:\/Users\/emmanuel\w+\/?(.*)|(.+))\z/${2:? – ${2/\A\/Users\/emmanuel/~/}:${1/\A(?=.)/ – /}}/} (${TM_SCM_BRANCH:-none})"
 
-include               = "{$include,.rspec,.env}"
-exclude               = "{$exclude,tmp/cache*,tmp/capybara*}"
+include               = "{$include,.*}"
+exclude               = "{$exclude,.git,tmp/cache*,tmp/capybara*}"
 excludeDirectories    = "{$excludeDirectories,tmp/cache,tmp/capybara}"
 excludeInFolderSearch = "{$excludeInFolderSearch,log/*.log}"
 # excludeInFolderSearch = ""
