@@ -111,7 +111,24 @@ remove()
     fi
 }
 
+
+link()
+{
+    local relative_path="$1"
+    local relative_directory="$(dirname "$1")"
+    script_dir="$(cd "$(dirname "$0")"; pwd)"
+    echo "Linking ${script_dir}/${relative_path} to ${HOME}/${relative_path}"
+
+    rm "${HOME}/${relative_path}"
+    mkdir -p "${HOME}/${relative_directory}"
+    ln -s "${script_dir}/${relative_path}" "${HOME}/${relative_path}"
+}
+
 # Install all configuration files
 install_home
 [[ -f /usr/local/bin/brew ]] || /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 cd $(dirname $0) && brew bundle
+
+link "Library/Application Support/TextMate/KeyBindings.dict"
+link "Library/KeyBindings/DefaultKeyBinding.dict"
+link "Library/Preferences/com.googlecode.iterm2.plist"
