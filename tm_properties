@@ -32,6 +32,13 @@ showInvisibles        = true
 [ target ]
 fileType              = "source.tm-properties"
 
+[ Makefile.* ]
+fileType              = "source.makefile"
+
+[ source.makefile ]
+tabSize               = 2
+softTabs              = false
+
 # special per-filetype rules can be specified like so:
 [ *.{txt,md,mdown,markdown} ]
 spellChecking         = true
