@@ -113,3 +113,5 @@ remove()
 
 # Install all configuration files
 install_home
+[[ -f /usr/local/bin/brew ]] || /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+cd $(dirname $0) && brew bundle
