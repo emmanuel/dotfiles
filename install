@@ -5,11 +5,11 @@
 install_home()
 {
     local dest_dir="$HOME"
-    local excluded=(`basename $0` README.mkd LICENSE TODO.mkd)
+    local excluded=(`basename $0` install declutter Brewfile Library README.mkd LICENSE TODO.mkd)
     replace_all=false
 
     local file
-    for file in *
+    for file in `dirname $0`/*
     do
         if ! element_exists "$file" "${excluded[@]}"
         then
