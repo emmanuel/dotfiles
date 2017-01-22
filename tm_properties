@@ -39,6 +39,10 @@ fileType              = "source.makefile"
 tabSize               = 2
 softTabs              = false
 
+[ source.terraform ]
+tabSize               = 4
+softTabs              = true
+
 # special per-filetype rules can be specified like so:
 [ *.{txt,md,mdown,markdown} ]
 spellChecking         = true
