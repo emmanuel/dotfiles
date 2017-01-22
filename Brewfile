@@ -4,6 +4,7 @@ tap 'homebrew/versions'
 tap 'homebrew/completions'
 brew 'homebrew/completions/brew-cask-completion'
 brew 'bash-completion'
+brew 'git'
 
 # brew 'postgresql'
 brew 'hub'
@@ -17,6 +18,7 @@ cask 'launchbar'
 cask 'textmate'
 brew 'homebrew/versions/ruby187', args: {'with-suffix' => '18'} \
   unless system '/usr/bin/env ruby18 --version'
+cask 'dash'
 
 cask 'docker'         # Docker for Mac
 cask 'google-chrome'
@@ -37,4 +39,4 @@ brew 'mas'
 mas 'Moom', id: 419330170
 mas 'The Unarchiver', id: 425424353
 mas 'Xcode', id: 497799835
-mas 'Dash', id: 449589707
+mas 'Slack', id: 803453959
