@@ -12,7 +12,7 @@ windowTitle           = "$TM_DISPLAYNAME${TM_DIRECTORY/\A(?:\/Users\/emmanuel\w+
 include               = "{$include,.*}"
 exclude               = "{$exclude,.git,tmp/cache*,tmp/capybara*}"
 excludeDirectories    = "{$excludeDirectories,tmp/cache,tmp/capybara}"
-excludeInFolderSearch = "{$excludeInFolderSearch,log/*.log}"
+excludeInFolderSearch = "{$excludeInFolderSearch,build/*,build.*/*,vendor/*,log/*.log}"
 # excludeInFolderSearch = ""
 # excludeInFileChooser  = "{$exclude,*.}"
 # exclude, excludeFiles, excludeDirectories, excludeInBrowser, excludeInFolderSearch, excludeInFileChooser, excludeFilesInBrowser
