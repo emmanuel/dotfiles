@@ -18,6 +18,7 @@ cask 'launchbar'
 cask 'textmate'
 brew 'homebrew/versions/ruby187', args: {'with-suffix' => '18'} \
   unless system '/usr/bin/env ruby18 --version'
+cask 'subclassed-mnemosyne'
 cask 'dash'
 
 cask 'docker'         # Docker for Mac
@@ -25,7 +26,6 @@ cask 'google-chrome'
 cask 'iterm2'
 cask 'slack'
 cask 'gitup'
-cask 'subclassed-mnemosyne'
 cask 'java' unless system '/usr/libexec/java_home --failfast'
 # cask 'ccmenu'
 
