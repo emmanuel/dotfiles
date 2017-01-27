@@ -38,5 +38,5 @@ cask 'java' unless system '/usr/libexec/java_home --failfast'
 brew 'mas'
 mas 'Moom', id: 419330170
 mas 'The Unarchiver', id: 425424353
-mas 'Xcode', id: 497799835
+# mas 'Xcode', id: 497799835
 mas 'Slack', id: 803453959
