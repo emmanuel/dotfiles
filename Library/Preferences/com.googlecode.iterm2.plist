@@ -653,6 +653,8 @@
 	<true/>
 	<key>NoSyncNeverRemindPrefsChangesLostForFile_selection</key>
 	<integer>0</integer>
+	<key>NoSyncPermissionToShowTip</key>
+	<false/>
 	<key>NoSyncTimeOfFirstLaunchOfVersionWithTip</key>
 	<real>506677871.45481902</real>
 	<key>PointerActions</key>
@@ -689,13 +691,19 @@
 		</dict>
 	</dict>
 	<key>PrefsCustomFolder</key>
-	<string>/Users/emmanuel/.dotfiles/Library/Preferences</string>
+	<string>/Users/x0bi/.dotfiles/Library/Preferences</string>
+	<key>SUEnableAutomaticChecks</key>
+	<true/>
 	<key>SUFeedAlternateAppNameKey</key>
 	<string>iTerm</string>
 	<key>SUFeedURL</key>
 	<string>https://iterm2.com/appcasts/final.xml?shard=71</string>
 	<key>SUHasLaunchedBefore</key>
 	<true/>
+	<key>SULastCheckTime</key>
+	<date>2017-01-27T06:51:36Z</date>
+	<key>SUSendProfileInfo</key>
+	<false/>
 	<key>WordCharacters</key>
 	<string>/-+\~_.</string>
 	<key>iTerm Version</key>
