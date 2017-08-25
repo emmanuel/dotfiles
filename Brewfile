@@ -2,8 +2,8 @@
 tap 'homebrew/versions'
 
 tap 'homebrew/completions'
-brew 'homebrew/completions/brew-cask-completion'
 brew 'bash-completion'
+brew 'brew-cask-completion'
 brew 'git'
 
 # brew 'postgresql'
@@ -20,6 +20,8 @@ brew 'homebrew/versions/ruby187', args: {'with-suffix' => '18'} \
   unless system '/usr/bin/env ruby18 --version'
 cask 'subclassed-mnemosyne'
 cask 'dash'
+cask 'things'
+cask 'colloquy'
 
 cask 'docker'         # Docker for Mac
 cask 'google-chrome'
