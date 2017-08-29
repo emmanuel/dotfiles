@@ -24,7 +24,6 @@ cask 'launchbar'
 cask 'textmate'
 cask 'subclassed-mnemosyne'
 cask 'dash'
-cask 'things'
 cask 'colloquy'
 
 cask 'docker'         # Docker for Mac
@@ -50,3 +49,4 @@ mas 'Moom', id: 419330170
 mas 'The Unarchiver', id: 425424353
 # mas 'Xcode', id: 497799835
 mas 'Slack', id: 803453959
+mas 'Things', id: 904280696
