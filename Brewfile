@@ -13,11 +13,15 @@ brew 'kubernetes-cli'
 brew 'awscli'
 brew 'go'
 
+if system('/usr/bin/env ruby18 --version')
+  puts "Ruby 1.8 is already installed"
+else
+  brew 'ruby@1.8', args: {'with-suffix' => '18'}
+end
+
 tap 'caskroom/cask'
 cask 'launchbar'
 cask 'textmate'
-brew 'homebrew/versions/ruby187', args: {'with-suffix' => '18'} \
-  unless system '/usr/bin/env ruby18 --version'
 cask 'subclassed-mnemosyne'
 cask 'dash'
 cask 'things'
