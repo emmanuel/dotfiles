@@ -28,7 +28,11 @@ cask 'things'
 cask 'colloquy'
 
 cask 'docker'         # Docker for Mac
-cask 'google-chrome'
+if File.exists?('/Applications/Google Chrome.app')
+  puts 'Google Chrome is already installed'
+else
+  cask 'google-chrome'
+end
 cask 'iterm2'
 # cask 'slack'
 cask 'gitup'
