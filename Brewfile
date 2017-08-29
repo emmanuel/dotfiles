@@ -36,7 +36,13 @@ end
 cask 'iterm2'
 # cask 'slack'
 cask 'gitup'
-cask 'java' unless system '/usr/libexec/java_home --failfast'
+
+if system('/usr/libexec/java_home --failfast')
+  puts 'Java is already installed'
+else
+  cask 'java'
+end
+
 # cask 'ccmenu'
 
 brew 'mas'
