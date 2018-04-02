@@ -3,28 +3,18 @@
 # If not running interactively, don't do anything
 [ -z "$PS1" ] && return
 
-source_file()
-{
-    local conf_file="$1"
-    if [[ -f $conf_file && $(basename $conf_file) != 'README' ]]
-    then
-        source "$conf_file"
-    fi
-}
+alias urlencode='python -c "import sys, urllib as ul; print ul.quote_plus(sys.argv[1])"'
+alias urldecode='python -c "import sys, urllib as ul; print ul.unquote_plus(sys.argv[1])"'
 
-source_dir()
-{
-    local dir="$1"
-    if [[ -d $dir ]]
-    then
-        local conf_file
-        for conf_file in "$dir"/*
-        do
-            source_file $conf_file
-        done
-    fi
-}
+alias srvhttp='twistd -n web -p ${PORT:-8888} --path .'
 
-source_dir ~/.bash.d/local/before
-source_dir ~/.bash.d
-source_dir ~/.bash.d/local/after
+export GREP_OPTIONS='--color=auto'
+export GOPATH="${HOME}/Code"
+export PATH="${HOME}/.bin:${GOPATH}/bin:/usr/local/bin:$PATH"
+
+export DIFF='opendiff'
+export EDITOR='mate -w'
+export PAGER='less -R'
+
+# Make less more friendly for non-text input files, see lesspipe(1)
+[ -x /usr/bin/lesspipe ] && eval "$(SHELL=/bin/sh lesspipe)"

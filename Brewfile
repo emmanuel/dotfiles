@@ -1,7 +1,3 @@
-# tap 'homebrew/dupes'
-tap 'homebrew/versions'
-
-tap 'homebrew/completions'
 brew 'bash-completion'
 brew 'brew-cask-completion'
 brew 'git'

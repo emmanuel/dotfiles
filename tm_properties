@@ -5,7 +5,7 @@ TM_GIT                = "/usr/local/bin/git"
 # fontName            = "DejaVu Sans Mono"
 # fontSize            = 15
 fontName              = "Monaco"
-fontSize              = 13
+fontSize              = 14
 
 windowTitle           = "$TM_DISPLAYNAME${TM_DIRECTORY/\A(?:\/Users\/emmanuel\w+\/?(.*)|(.+))\z/${2:? – ${2/\A\/Users\/emmanuel/~/}:${1/\A(?=.)/ – /}}/} (${TM_SCM_BRANCH:-none})"
 
