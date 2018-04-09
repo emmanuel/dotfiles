@@ -71,6 +71,7 @@ cat <<EOF
 
   slog  = !git --no-pager log --format=oneline --abbrev-commit
   dfnp  = !git --no-pager diff
+  # Prefer SSH to HTTPS for public Github and Nordstrom Gitlab
+  url.git@github.com:.insteadof=https://github.com/
+  url.git@gitlab.nordstrom.com:.insteadof=https://gitlab.nordstrom.com/
 EOF
-
-# vim: filetype=bash :
