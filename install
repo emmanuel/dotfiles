@@ -6,6 +6,8 @@ cp "${SCRIPT_DIR}/TextMate-KeyBindings.dict" "${HOME}/Library/Application Suppor
 cp "${SCRIPT_DIR}/DefaultKeyBinding.dict" "${HOME}/Library/KeyBindings/DefaultKeyBinding.dict"
 cp "${SCRIPT_DIR}/com.googlecode.iterm2.plist" "${HOME}/Library/Preferences/com.googlecode.iterm2.plist"
 cp "${SCRIPT_DIR}/prompt_config.sh" "${HOME}/.prompt_config.sh"
+cp "${SCRIPT_DIR}/bashrc" "${HOME}/.bashrc"
+cp "${SCRIPT_DIR}/profile" "${HOME}/.profile"
 ln -s "${SCRIPT_DIR}/tm_properties" "${HOME}/.tm_properties"
 "${SCRIPT_DIR}/gitconfig.sh" > "${HOME}/.gitconfig"
 
