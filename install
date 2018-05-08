@@ -10,7 +10,7 @@ cp "${SCRIPT_DIR}/prompt_config.sh" "${HOME}/.prompt_config.sh"
 cp "${SCRIPT_DIR}/bashrc" "${HOME}/.bashrc"
 cp "${SCRIPT_DIR}/profile" "${HOME}/.profile"
 ln -s "${SCRIPT_DIR}/tm_properties" "${HOME}/.tm_properties"
-"${SCRIPT_DIR}/gitconfig.sh" > "${HOME}/.gitconfig"
+[ -f "${HOME}/.gitconfig" ] || "${SCRIPT_DIR}/gitconfig.sh" > "${HOME}/.gitconfig"
 
 [[ -f /usr/local/bin/brew ]] || /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 
