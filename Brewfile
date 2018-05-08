@@ -20,7 +20,7 @@ cask 'launchbar'
 cask 'textmate'
 cask 'subclassed-mnemosyne'
 cask 'dash'
-cask 'colloquy'
+# cask 'colloquy'
 
 cask 'docker'         # Docker for Mac
 if File.exists?('/Applications/Google Chrome.app')
