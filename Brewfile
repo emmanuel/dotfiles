@@ -1,10 +1,12 @@
 brew 'bash-completion'
 brew 'brew-cask-completion'
 brew 'git'
+brew 'watch'
+brew 'tree'
+brew 'jq'
 
 # brew 'postgresql'
 brew 'hub'
-brew 'jq'
 brew 'kubernetes-cli'
 brew 'awscli'
 brew 'go'
