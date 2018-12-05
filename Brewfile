@@ -10,6 +10,9 @@ brew 'hub'
 brew 'kubernetes-cli'
 brew 'awscli'
 brew 'go'
+brew 'nodejs'
+brew 'elm'
+brew 'elm-format'
 
 if system('/usr/bin/env ruby18 --version')
   puts "Ruby 1.8 is already installed"
