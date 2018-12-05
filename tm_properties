@@ -40,7 +40,7 @@ tabSize               = 2
 softTabs              = false
 
 [ source.terraform ]
-tabSize               = 4
+tabSize               = 2
 softTabs              = true
 
 # special per-filetype rules can be specified like so:
