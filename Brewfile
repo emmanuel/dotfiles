@@ -13,6 +13,11 @@ brew 'go'
 brew 'nodejs'
 brew 'elm'
 brew 'elm-format'
+brew 'terraform'
+
+tap 'versent/homebrew-taps'
+
+brew 'saml2aws'
 
 if system('/usr/bin/env ruby18 --version')
   puts "Ruby 1.8 is already installed"
