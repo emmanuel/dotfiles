@@ -10,7 +10,7 @@ alias srvhttp='twistd -n web -p ${PORT:-8888} --path .'
 
 export GREP_OPTIONS='--color=auto'
 export GOPATH="${HOME}/Code"
-export PATH="${HOME}/.bin:${GOPATH}/bin:/usr/local/bin:$PATH"
+export PATH="${HOME}/.bin:${HOME}/.cargo/bin:${GOPATH}/bin:/usr/local/bin:$PATH"
 
 export DIFF='opendiff'
 export EDITOR='mate -w'
