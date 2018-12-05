@@ -794,43 +794,104 @@ defaults write com.google.Chrome PMPrintingExpandedStateForPrint2 -bool true
 defaults write com.google.Chrome.canary PMPrintingExpandedStateForPrint2 -bool true
 
 ###############################################################################
-# GPGMail 2                                                                   #
+# TextMate.app                                                                #
 ###############################################################################
 
-# Disable signing emails by default
-# defaults write ~/Library/Preferences/org.gpgtools.gpgmail SignNewEmailsByDefault -bool false
+# Add /usr/local/bin to $PATH in TextMate
+defaults write com.macromates.TextMate "environmentVariables" \
+  -array '{ enabled = :true;
+            name = "PATH";
+            value = "$PATH:/usr/local/bin:/opt/local/bin:/usr/texbin";
+          }'
 
 ###############################################################################
-# Opera & Opera Developer                                                     #
+# LaunchBar.app                                                               #
 ###############################################################################
 
-# Expand the print dialog by default
-# defaults write com.operasoftware.Opera PMPrintingExpandedStateForPrint2 -boolean true
-# defaults write com.operasoftware.OperaDeveloper PMPrintingExpandedStateForPrint2 -boolean true
+# Enable and set keyboard shortcut
+defaults write at.obdev.LaunchBar "LaunchBarHotKeyEnabled" -bool true
+defaults write at.obdev.LaunchBar "LaunchBarHotKey" -string "2048@49"
+# Enable clipboard history and configure to retain last 20 clipboard items
+defaults write at.obdev.LaunchBar "ClipboardHistoryEnabled" -bool true
+defaults write at.obdev.LaunchBar "ClipboardHistoryCapacity" -int 20
+# Position at top middle of screen
+defaults write at.obdev.LaunchBar "LaunchBarHorizontalPosition" -int 0
+defaults write at.obdev.LaunchBar "LaunchBarVerticalPosition" -int 1
+defaults write at.obdev.LaunchBar "LaunchBarWindowWidth" -int 600
+# Add LaunchBar to login items
+osascript -e 'tell application "System Events" to make login item at end with properties {path:"/Applications/LaunchBar.app", hidden:false}'
 
 ###############################################################################
-# SizeUp.app                                                                  #
+# Things.app                                                                  #
 ###############################################################################
 
-# Start SizeUp at login
-# defaults write com.irradiatedsoftware.SizeUp StartAtLogin -bool true
-
-# Don’t show the preferences window on next start
-# defaults write com.irradiatedsoftware.SizeUp ShowPrefsOnNextStart -bool false
+defaults write com.culturedcode.ThingsMac "LegacyAppDataImportIsSupressed" -bool true
+# Don't show initial help prompts
+defaults write com.culturedcode.ThingsMac "OnboardingDidComplete" -bool true
+# Configure hotkey
+defaults write com.culturedcode.ThingsMac "QuickEntryHotkeyAutofill" -dict-add "characters" -string "⌃⌥⎵"
+defaults write com.culturedcode.ThingsMac "QuickEntryHotkeyAutofill" -dict-add "keyCode" -int 49
+defaults write com.culturedcode.ThingsMac "QuickEntryHotkeyAutofill" -dict-add "keyModifiers" -int 6144
+# Configure hotkey
+defaults write com.culturedcode.ThingsMac "QuickEntryHotkeyEmpty" -dict-add "characters" -string "⌃⎵"
+defaults write com.culturedcode.ThingsMac "QuickEntryHotkeyEmpty" -dict-add "keyCode" -int 49
+defaults write com.culturedcode.ThingsMac "QuickEntryHotkeyEmpty" -dict-add "keyModifiers" -int 4096
+# Add Things to login items, launch hidden
+osascript -e 'tell application "System Events" to make login item at end with properties {path:"/Applications/Things.app", hidden:true}'
 
 ###############################################################################
-# Sublime Text                                                                #
+# Moom.app                                                                    #
 ###############################################################################
 
-# Install Sublime Text settings
-# cp -r init/Preferences.sublime-settings ~/Library/Application\ Support/Sublime\ Text*/Packages/User/Preferences.sublime-settings 2> /dev/null
+# Run as a menu-bar application
+defaults write com.manytricks.Moom "Application Mode" -int 1
+# Do not show preferences on launch
+defaults write com.manytricks.Moom "Stealth Mode" -bool true
+# Do not show Moom news popup
+defaults write com.manytricks.Moom "Automatic News Updates: Popped Up Once" -bool true
+defaults write com.manytricks.Moom "Automatic News Updates: Version" -int 6
+# configure keyboard shortcut (⌃⌥⌘Space)
+
+# "Keyboard Controls" = {
+#   Identifier = "Keyboard Controls";
+#   "Key Code" = 49;
+#   "Modifier Flags" = 1835305;
+#   "Visual Representation" = "⌃⌥⌘Space";
+# };
+defaults write com.manytricks.Moom "Keyboard Controls" -dict-add "Identifier" -string "Keyboard Controls"
+defaults write com.manytricks.Moom "Keyboard Controls" -dict-add "Key Code" -int 49
+defaults write com.manytricks.Moom "Keyboard Controls" -dict-add "Modifier Flags" -int 1835305
+defaults write com.manytricks.Moom "Keyboard Controls" -dict-add "Visual Representation" -string "⌃⌥⌘Space"
+# Add Moom to login items
+osascript -e 'tell application "System Events" to make login item at end with properties {path:"/Applications/Moom.app", hidden:false}'
 
 ###############################################################################
-# Spectacle.app                                                               #
+# Gitup.app                                                                   #
 ###############################################################################
 
-# Set up my preferred keyboard shortcuts
-# cp -r init/spectacle.json ~/Library/Application\ Support/Spectacle/Shortcuts.json 2> /dev/null
+# try to disable/defeat Google Analytics tracking
+defaults write co.gitup.mac "GARawTrackerClientID" -string "00000000-0000-0000-0000-000000000000"
+# don't show any of the welcome or help interfaces
+defaults write co.gitup.mac "ShowWelcomeWindow" -bool false
+defaults write co.gitup.mac "HelpShown_MAP" -int 4
+defaults write co.gitup.mac "HelpShown_COMMIT" -int 2
+defaults write co.gitup.mac "HelpShown_STASHES" -int 1
+defaults write co.gitup.mac "HelpShown_SNAPSHOTS" -int 1
+
+###############################################################################
+# Mnemosyne.app                                                               #
+###############################################################################
+
+# Set default length and use all characters in output
+defaults write com.subclassed.Mnemosyne length -int 10
+defaults write com.subclassed.Mnemosyne strength -int 3
+
+###############################################################################
+# BitBar.app                                                                  #
+###############################################################################
+
+# Set plugin directory
+defaults write com.matryer.BitBar pluginsDirectory "$HOME/.dotfiles/bitbar-plugins"
 
 ###############################################################################
 # Transmission.app                                                            #
@@ -903,28 +964,29 @@ defaults write org.m0k.transmission RandomPort -bool true
 # Kill affected applications                                                  #
 ###############################################################################
 
-for app in "Activity Monitor" \
-	"Address Book" \
-	"Calendar" \
-	"cfprefsd" \
-	"Contacts" \
-	"Dock" \
-	"Finder" \
-	"Google Chrome Canary" \
-	"Google Chrome" \
-	"Mail" \
-	"Messages" \
-	"Opera" \
-	"Photos" \
-	"Safari" \
-	"SizeUp" \
-	"Spectacle" \
-	"SystemUIServer" \
-	"Terminal" \
-	"Transmission" \
-	"Tweetbot" \
-	"Twitter" \
-	"iCal"; do
-	killall "${app}" &> /dev/null
+AFFECTED_APPLICATIONS="Activity\ Monitor \
+  Address\ Book \
+  Calendar \
+  cfprefsd \
+  Contacts \
+  Dock \
+  Finder \
+  GitUp \
+  Google\ Chrome\ Canary \
+  Google\ Chrome \
+  iCal \
+  iTerm \
+  LaunchBar \
+  Mail \
+  Messages \
+  Moom \
+  Photos \
+  Safari \
+  SystemUIServer \
+  Terminal \
+  Things \
+  Transmission"
+for app in $AFFECTED_APPLICATIONS; do
+  killall "${app}" &> /dev/null
 done
 echo "Done. Note that some of these changes require a logout/restart to take effect."
