@@ -16,8 +16,15 @@ cat <<EOF
   token = !security 2>&1 >/dev/null find-generic-password -gs \"Github API Token\" | ruby -e 'print $1 if STDIN.gets =~ /^password: \\\"(.*)\\\"$/'
 [merge]
   tool = opendiff
-[credential]
-  helper = cache --timeout=3600
+# [credential]
+#   helper = cache --timeout=3600
+# TODO: explore using `osxkeychain` as the default git credential helper
+#   helper = osxkeychain
+[credential "https://git-codecommit.us-west-2.amazonaws.com"]
+  # thanks! https://stackoverflow.com/a/36456549
+  # helper = !security delete-internet-password -l "git-codecommit.us-west-2.amazonaws.com" || aws --region=us-west-2 --profile=impinj-shared-svcs-admin codecommit credential-helper $@
+  helper = !security delete-internet-password -l "git-codecommit.us-west-2.amazonaws.com" || aws --profile=impinj-shared-svcs-admin codecommit credential-helper $@
+  UseHttpPath = true
 [color]
   diff = auto
   status = auto
