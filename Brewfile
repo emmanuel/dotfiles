@@ -20,35 +20,42 @@ tap 'versent/homebrew-taps'
 brew 'saml2aws'
 
 if system('/usr/bin/env ruby18 --version')
-  puts "Ruby 1.8 is already installed"
+  puts 'Ruby 1.8 is already installed'
 else
   brew 'ruby@1.8', args: {'with-suffix' => '18'}
 end
 
+def install_unless_pre_installed(cask_name, app_path)
+  if !File.exists?(app_path)
+    cask app_path
+  end
+end
+
 tap 'caskroom/cask'
-cask 'launchbar'
+
 cask 'textmate'
-cask 'subclassed-mnemosyne'
-cask 'dash'
-# cask 'colloquy'
-
-cask 'docker'         # Docker for Mac
-if File.exists?('/Applications/Google Chrome.app')
-  puts 'Google Chrome is already installed'
-else
-  cask 'google-chrome'
-end
+cask 'launchbar'
+cask 'thingsmacsandboxhelper'
 cask 'iterm2'
-# cask 'slack'
 cask 'gitup'
+cask 'subclassed-mnemosyne'
+cask 'softu2f'
+cask 'aws-vault'
+cask 'postman'
+cask 'colloquy'
+cask 'docker'
+cask 'google-cloud-sdk'
+cask 'zoomus'
+cask 'spotify'
+cask 'bitbar' # for OpenConnect VPN "GUI"
+install_unless_pre_installed('google-chrome', '/Applications/Google Chrome.app')
+install_unless_pre_installed('firefox',       '/Applications/Firefox.app')
 
-if system('/usr/libexec/java_home --failfast')
-  puts 'Java is already installed'
-else
-  cask 'java'
-end
+cask 'vlc'
+cask 'transmission'
 
-# cask 'ccmenu'
+system('/usr/libexec/java_home --failfast')     || cask('java')
+
 
 brew 'mas'
 mas 'Moom', id: 419330170
