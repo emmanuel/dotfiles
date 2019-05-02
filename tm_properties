@@ -35,6 +35,10 @@ fileType              = "source.tm-properties"
 [ Makefile.* ]
 fileType              = "source.makefile"
 
+[ source.go ]
+tabSize               = 2
+softTabs              = false
+
 [ source.makefile ]
 tabSize               = 2
 softTabs              = false
