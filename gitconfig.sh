@@ -13,7 +13,11 @@ cat <<EOF
   editor = mate -w
 [github]
   user = $GITHUB_USER
-  token = !security 2>&1 >/dev/null find-generic-password -gs \"Github API Token\" | ruby -e 'print $1 if STDIN.gets =~ /^password: \\\"(.*)\\\"$/'
+  # token = !security 2>&1 >/dev/null find-generic-password -gs \"Github API Token\" | ruby -e 'print $1 if STDIN.gets =~ /^password: \\\"(.*)\\\"$/'
+  token = !security 2>&1 >/dev/null find-generic-password -ws \"Github API Token\"
+# Use SSH instead of HTTPS for Github
+[url "ssh://git@github.com/"]
+  insteadOf = https://github.com/
 [merge]
   tool = opendiff
 # [credential]
@@ -78,7 +82,4 @@ cat <<EOF
 
   slog  = !git --no-pager log --format=oneline --abbrev-commit
   dfnp  = !git --no-pager diff
-  # Use SSH instead of HTTPS for Github
-  [url "ssh://git@github.com/"]
-  	insteadOf = https://github.com/
 EOF
