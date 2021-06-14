@@ -15,6 +15,9 @@ ln -s "${SCRIPT_DIR}/tm_properties" "${HOME}/.tm_properties"
 
 [[ -f /usr/local/bin/brew ]] || /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 
-cd "${SCRIPT_DIR}" && brew bundle
+# cd "${SCRIPT_DIR}" && brew bundle install
+brew bundle install --file="${SCRIPT_DIR}/Brewfile"
 
-"${SCRIPT_DIR}/macos"
+# "${SCRIPT_DIR}/install-mnemosyne"
+
+# "${SCRIPT_DIR}/macos"
