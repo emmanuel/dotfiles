@@ -1,61 +1,58 @@
 brew 'bash-completion'
+brew 'zsh-completion'
 brew 'brew-cask-completion'
 brew 'git'
+
+brew 'nodejs' # includes 'npm'
+brew 'yarn'
+brew 'elm'
+brew 'elm-format'
+brew 'go'
+
 brew 'watch'
 brew 'tree'
 brew 'jq'
 
-# brew 'postgresql'
 brew 'hub'
 brew 'kubernetes-cli'
 brew 'awscli'
-brew 'go'
-brew 'nodejs'
-brew 'elm'
-brew 'elm-format'
 brew 'terraform'
+# brew 'postgresql'
 
-tap 'versent/homebrew-taps'
-
-brew 'saml2aws'
-
-if system('/usr/bin/env ruby18 --version')
-  puts 'Ruby 1.8 is already installed'
-else
-  brew 'ruby@1.8', args: {'with-suffix' => '18'}
-end
-
-def install_unless_pre_installed(cask_name, app_path)
-  if !File.exists?(app_path)
-    cask app_path
-  end
-end
-
-tap 'caskroom/cask'
+# tap 'versent/homebrew-taps'
+# brew 'saml2aws'
 
 cask 'textmate'
-cask 'launchbar'
-cask 'thingsmacsandboxhelper'
+cask 'visual-studio-code'
+cask 'intellij-idea-ce'
+
+cask 'docker'
+cask 'postgres'
 cask 'iterm2'
 cask 'gitup'
-cask 'subclassed-mnemosyne'
+
+cask 'launchbar'
+cask 'thingsmacsandboxhelper'
 cask 'softu2f'
 cask 'aws-vault'
 cask 'postman'
-cask 'colloquy'
-cask 'docker'
 cask 'google-cloud-sdk'
+
+cask 'colloquy'
+cask 'discord'
 cask 'zoomus'
 cask 'spotify'
-cask 'bitbar' # for OpenConnect VPN "GUI"
-install_unless_pre_installed('google-chrome', '/Applications/Google Chrome.app')
-install_unless_pre_installed('firefox',       '/Applications/Firefox.app')
+
+cask 'google-chrome'
+cask 'firefox'
 
 cask 'vlc'
 cask 'transmission'
 
-system('/usr/libexec/java_home --failfast')     || cask('java')
-
+system('/usr/libexec/java_home --failfast') || begin
+  tap 'AdoptOpenJDK/openjdk'
+  cask 'adoptopenjdk8'
+end
 
 brew 'mas'
 

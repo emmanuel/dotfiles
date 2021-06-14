@@ -1,0 +1,7 @@
+#!/bin/bash
+
+SCRIPT_DIR=$(dirname $0)
+
+curl -sLo ~/Downloads/Mnemosyne.zip https://www.subclassed.com/files/sw/Mnemosyne.zip
+unzip -d ~/Downloads/ ~/Downloads/Mnemosyne.zip
+mv ~/Downloads/Mnemosyne.app /Applications

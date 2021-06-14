@@ -9,7 +9,7 @@ cat <<EOF
   name = $GIT_NAME
   email = $GIT_EMAIL
 [core]
-  excludesfile = $HOME/.gitignore
+  excludesfile = $HOME/.gitignore_global
   editor = mate -w
 [github]
   user = $GITHUB_USER
@@ -20,10 +20,22 @@ cat <<EOF
   insteadOf = https://github.com/
 [merge]
   tool = opendiff
+[diff]
+  tool = opendiff
+[difftool]
+  prompt = false
 # [credential]
 #   helper = cache --timeout=3600
 # TODO: explore using `osxkeychain` as the default git credential helper
 #   helper = osxkeychain
+[push]
+  default = current
+[pull]
+  default = current
+  rebase = true
+[rerere]
+  enabled = true
+  autoupdate = true
 [credential "https://git-codecommit.us-west-2.amazonaws.com"]
   # thanks! https://stackoverflow.com/a/36456549
   # helper = !security delete-internet-password -l "git-codecommit.us-west-2.amazonaws.com" || aws --region=us-west-2 --profile=impinj-shared-svcs-admin codecommit credential-helper $@
@@ -82,4 +94,11 @@ cat <<EOF
 
   slog  = !git --no-pager log --format=oneline --abbrev-commit
   dfnp  = !git --no-pager diff
+  exec = '!exec '
+  root = rev-parse --show-toplevel
+[filter "lfs"]
+  smudge = git-lfs smudge -- %f
+  process = git-lfs filter-process
+  required = true
+  clean = git-lfs clean -- %f
 EOF
