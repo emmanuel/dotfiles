@@ -1,0 +1,9 @@
+[user]
+  name = Emmanuel Gomez
+  email = emmanuel@pelotech.com
+# Pelotech: Impinj
+[credential "https://git-codecommit.us-west-2.amazonaws.com"]
+  # thanks! https://stackoverflow.com/a/36456549
+  # helper = !security delete-internet-password -l "git-codecommit.us-west-2.amazonaws.com" || aws --region=us-west-2 --profile=impinj-shared-svcs-admin codecommit credential-helper 
+  helper = !security delete-internet-password -l "git-codecommit.us-west-2.amazonaws.com" || aws --profile=impinj-shared-svcs-admin codecommit credential-helper 
+  UseHttpPath = true
