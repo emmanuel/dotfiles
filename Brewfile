@@ -1,13 +1,14 @@
 brew 'bash-completion'
-brew 'zsh-completion'
+brew 'zsh-completions'
 brew 'brew-cask-completion'
 brew 'git'
+brew 'gpg'
 
+brew 'go'
 brew 'nodejs' # includes 'npm'
 brew 'yarn'
 brew 'elm'
-brew 'elm-format'
-brew 'go'
+# brew 'elm-format'
 
 brew 'watch'
 brew 'tree'
@@ -17,34 +18,35 @@ brew 'hub'
 brew 'kubernetes-cli'
 brew 'awscli'
 brew 'terraform'
-# brew 'postgresql'
+brew 'openconnect'
+brew 'bitwarden-cli'
 
-# tap 'versent/homebrew-taps'
-# brew 'saml2aws'
-
+cask 'launchbar'
 cask 'textmate'
+cask 'iterm2'
+cask 'gitup'
 cask 'visual-studio-code'
 cask 'intellij-idea-ce'
 
 cask 'docker'
-cask 'postgres'
-cask 'iterm2'
-cask 'gitup'
+# TODO: this cask doesn't work. why?
+# cask 'postgres'
+# cask 'homebrew/cask-versions/postgres-beta'
 
-cask 'launchbar'
 cask 'thingsmacsandboxhelper'
-cask 'softu2f'
 cask 'aws-vault'
-cask 'postman'
-cask 'google-cloud-sdk'
 
-cask 'colloquy'
-cask 'discord'
-cask 'zoomus'
-cask 'spotify'
-
+cask 'finicky'
+cask 'browserosaurus'
 cask 'google-chrome'
 cask 'firefox'
+
+# TODO: had to "finesse" the keybase installation to run midway:
+# arch -x86_64 /Applications/Keybase.app/Contents/SharedSupport/bin/keybase install-auto
+# cask 'keybase'
+# cask 'discord'
+cask 'zoom'
+cask 'spotify'
 
 cask 'vlc'
 cask 'transmission'
@@ -57,6 +59,7 @@ end
 brew 'mas'
 
 mas 'Moom',             id: 419330170
+mas 'Bitwarden',        id: 1352778147
 mas 'The Unarchiver',   id: 425424353
 mas 'Slack',            id: 803453959
 mas 'Things',           id: 904280696

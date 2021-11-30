@@ -1,36 +1,83 @@
-# ~/.bashrc: executed by bash(1) for non-login shells.
+# Check the window size after each command and, if necessary, update the
+# values of LINES and COLUMNS.
+# shopt -s checkwinsize
 
-# If not running interactively, don't do anything
-[ -z "$PS1" ] && return
+# Start typing a command at a shell prompt, then hit up/down for history search
+# using the inputted text as the beginning of the search string
+# bind '"\e[A": history-search-backward'
+# bind '"\e[B": history-search-forward'
+
+bindkey '^[OH' beginning-of-line
+bindkey '^[OF' end-of-line
+bindkey '^[[3~' delete-char
+bindkey -e
 
 alias urlencode='python -c "import sys, urllib as ul; print ul.quote_plus(sys.stdin.read())"'
 alias urldecode='python -c "import sys, urllib as ul; print ul.unquote_plus(sys.stdin.read())"'
 
 alias srvhttp='twistd -n web -p ${PORT:-8888} --path .'
 
-export GOPATH="${HOME}/Code"
-export CARGOPATH="${HOME}/.cargo"
-PATH="/usr/local/bin:$PATH"
-PATH="/usr/local/opt/node@12/bin:$PATH"
-PATH="${GOPATH}/bin:$PATH"
-PATH="${CARGOPATH}/bin:$PATH"
-PATH="${HOME}/.bin:$PATH"
-# export PATH="$(brew --prefix)/opt/coreutils/libexec/gnubin:$PATH"
-# export PATH="$(brew --prefix)/opt/gnu-sed/libexec/gnubin:$PATH"
-# export PATH="$(brew --prefix)/opt/grep/libexec/gnubin:$PATH"
-export PATH="/Applications/Postgres.app/Contents/Versions/latest/bin:$PATH"
-export PATH
-
-export DIFF='opendiff'
-export EDITOR='mate -w'
-export PAGER='less -R'
+# eval "$(brew shellenv)"
+eval "$(direnv hook zsh)"
 
 # Make less more friendly for non-text input files, see lesspipe(1)
 [ -x /usr/bin/lesspipe ] && eval "$(SHELL=/bin/sh lesspipe)"
 
-eval "$(direnv hook zsh)"
-
 # enable git completions; see: https://stackoverflow.com/a/54629182/5153603
-zstyle ':completion:*:*:git:*' script ~/.zsh/completions/git-completion.bash
-fpath=(~/.zsh/completions $fpath)
-autoload -Uz compinit && compinit
+# zstyle ':completion:*:*:git:*' script ~/.zsh/completions/git-completion.bash
+# fpath=(~/.zsh/completions $fpath)
+# autoload -Uz compinit && compinit
+
+
+FPATH="$(brew --prefix)/share/zsh-completions:$FPATH"
+
+autoload -Uz compinit
+compinit
+
+
+function get-repo() {
+  [[ -n "$TRACE" ]] && set -x
+  readonly repo_host_path=${1:?"The host/path must be specified."}
+  echo "repo_host_path=$repo_host_path"
+
+  readonly srcdir="$GOPATH/src/$repo_host_path"
+  readonly parentdir="$(dirname "$srcdir")"
+  # echo "srcdir=$srcdir"
+  # echo "parentdir=$parentdir"
+
+  mkdir -p "$parentdir"
+  git clone "https://$repo_host_path" "$srcdir"
+}
+
+function vpn-up() {
+  # one
+  # SPLIT_COMMAND=""
+ 
+  # if [[ "$1" == "split" ]]; then
+  #   SPLIT_COMMAND="--script='$HOME/.local_config/vpnc-script.sh'"
+  # fi
+
+  # op get item tmobile | jq -r '.details.fields[] | select(.designation=="password").value' | sudo openconnect \
+  #   --background \
+  #   --pid-file="$HOME/.openconnect.pid" \
+  #   --user=$OPENCONNECT_USER \
+  #   $SPLIT_COMMAND \
+  #   --useragent='AnyConnect Darwin_x64 3.9.04053' \
+  #   --passwd-on-stdin \
+  #   $OPENCONNECT_HOST
+  
+  # NB: this assumes a unique item name in Bitwarden
+  "~/Library/Application Support/xbar/plugins/vpn-status-v2.10s.sh" connect
+}
+
+function vpn-split() {
+  vpn-up split
+}
+
+function vpn-down() {
+  if [[ -f "$HOME/.openconnect.pid" ]]; then
+    sudo kill -2 $(cat "$HOME/.openconnect.pid") && rm -f "$HOME/.openconnect.pid"
+  else
+    echo "openconnect pid file does not exist, probably not running"
+  fi
+}

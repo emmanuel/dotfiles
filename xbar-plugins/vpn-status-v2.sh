@@ -1,5 +1,17 @@
 #!/bin/bash
+# <xbar.title>VPN Status</xbar.title>
+# <xbar.version>v1.2</xbar.version>
+# <xbar.author>Emmanuel Gomez</xbar.author>
+# <xbar.author.github>emmanuel</xbar.author.github>
+# <xbar.desc>Connect/Disconnect OpenConnect + show status</xbar.desc>
+# <xbar.image></xbar.image>
+
 # Credit for original concept and initial work to: Jesse Jarzynka
+# Credit for maintenance and extension to: Ventz Petkov
+
+# Updated by: Emmanuel Gomez (2021-07-09)
+#   * Updated for use as an xbar plugin (replaced `bitbar.*` with `xbar.*`)
+#   * 
 
 # Updated by: Ventz Petkov (8-31-18)
 #   * merged feature for token/pin input (ex: Duo/Yubikey/Google Authenticator) contributed by Harry Hoffman <hhoffman@ip-solutions.net>
@@ -17,13 +29,6 @@
 #   * added ability to work with "Duo" 2-factor auth
 #   * changed icons
 
-# <bitbar.title>VPN Status</bitbar.title>
-# <bitbar.version>v1.1</bitbar.version>
-# <bitbar.author>Ventz Petkov</bitbar.author>
-# <bitbar.author.github>ventz</bitbar.author.github>
-# <bitbar.desc>Connect/Disconnect OpenConnect + show status</bitbar.desc>
-# <bitbar.image></bitbar.image>
-
 #########################################################
 # USER CHANGES #
 #########################################################
@@ -35,41 +40,52 @@
 
 # 2.) Make sure openconnect binary is located here:
 #     (If you don't have it installed: "brew install openconnect")
-VPN_EXECUTABLE=/usr/local/bin/openconnect
+# VPN_EXECUTABLE=/usr/local/bin/openconnect
+# Homebrew installs to `/usr/local` on Intel, and `/opt/homebrew` on Apple Silicon
+VPN_EXECUTABLE=/opt/homebrew/bin/openconnect
+VPN_PID_PATH="$HOME/.openconnect.pid"
 
 # NOTES:
 # * https://github.com/openconnect/openconnect-gui/issues/230#issuecomment-381093573
 # * http://git.infradead.org/users/dwmw2/vpnc-scripts.git/history/HEAD:/vpnc-script
 
-SCRIPT_DIR=$(dirname $0)
-source "${SCRIPT_DIR}/openconnect-support/vpn_settings.env"
+# SCRIPT_DIR=$(cd `dirname $0`; pwd -P)
+# SCRIPT_DIR=$(cd `dirname $BASH_SOURCE[0]`; pwd -P)
+# SCRIPT_DIR="$( cd "$(dirname "${BASH_SOURCE[0]}")" ; pwd -P )"
 
-VPNC_SCRIPT_PATH="${VPNC_SCRIPT_PATH:-/usr/local/etc/vpnc-script}"
+# source "${SCRIPT_DIR}/openconnect-support/vpn_settings.env"
 
-VPN_CONNECTION_LABEL="${VPN_CONNECTION_LABEL?:must be set}"
+# VPNC_SCRIPT_PATH="${VPNC_SCRIPT_PATH:-/usr/local/etc/vpnc-script}"
 
 # 3.) Update your AnyConnect VPN host
 # VPN_HOST="vpn.domain.tld"
-VPN_HOST="${VPN_HOST?:must be set}"
+# VPN_HOST="${VPN_HOST?:must be set}"
+VPN_HOST="general.vpn.t-mobile.com"
+
+# VPN_CONNECTION_LABEL="${VPN_CONNECTION_LABEL?:must be set}"
+VPN_CONNECTION_LABEL="T-Mobile"
 
 # 4.) Update your AnyConnect username + tunnel
 # VPN_USERNAME="vpn_username@domain.tld#VPN_TUNNEL_OPTIONALLY"
-VPN_USERNAME="${VPN_USERNAME?:must be set}"
+[[ -n "$TRACE" ]] && set -x
+GET_VPN_USERNAME="security find-internet-password -l $VPN_HOST | grep acct | cut -d= -f2 | cut -d'\"' -f2"
+# VPN_USERNAME="${VPN_USERNAME?:must be set}"
+VPN_USERNAME="$(eval $GET_VPN_USERNAME)"
 
-VPN_GROUP="${VPN_GROUP?:must be set}"
+# VPN_GROUP="${VPN_GROUP?:must be set}"
 
 # 5.) Push 2FA (ex: Duo), or Pin/Token (ex: Yubikey, Google Authenticator, TOTP)
-PUSH_OR_PIN="${PUSH_OR_PIN?:must be set}"
-# PUSH_OR_PIN="Okta"
-# PUSH_OR_PIN="push"
-#PUSH_OR_PIN="Yubikey"
+# MFA_TYPE="${MFA_TYPE?:must be set}"
+# MFA_TYPE="Okta"
+# MFA_TYPE="push"
+#MFA_TYPE="Yubikey"
 # ---
 # * For Push (and other Duo specifics), options include:
 # "push", "sms", or "phone"
 # ---
 # * For Yubikey/Google Authenticator/other TOTP, specify any name for prompt:
 # "any-name-of-product-to-be-prompted-about"
-# PUSH_OR_PIN="Yubikey" | PUSH_OR_PIN="Google Authenticator" | PUSH_OR_PIN="Duo"
+# MFA_TYPE="Yubikey" | MFA_TYPE="Google Authenticator" | MFA_TYPE="Duo"
 # (essentially, anything _other_ than the "push", "sms", or "phone" options)
 # ---
 
@@ -83,7 +99,7 @@ PUSH_OR_PIN="${PUSH_OR_PIN?:must be set}"
 
 # This will retrieve that password securely at run time when you connect, and feed it to openconnect
 # No storing passwords unenin plain text files! :)
-GET_VPN_PASSWORD="security find-generic-password -wl $VPN_HOST"
+GET_VPN_PASSWORD="security find-internet-password -wl $VPN_HOST"
 
 VPN_TIMEOUT=10
 
@@ -96,7 +112,7 @@ VPN_INTERFACE="utun99"
 # Command to determine if VPN is connected or disconnected
 VPN_CONNECTED="/sbin/ifconfig | grep -A3 $VPN_INTERFACE | grep inet"
 # Command to run to disconnect VPN
-VPN_DISCONNECT_CMD=""
+VPN_DISCONNECT_CMD="/usr/bin/killall -2 openconnect"
 
 # GUI Prompt for your token/key (ex: Duo/Yubikey/Google Authenticator)
 function prompt_2fa_method() {
@@ -118,20 +134,26 @@ EOF
 
 case "$1" in
   connect)
-    VPN_PASSWORD=$(eval "$GET_VPN_PASSWORD")
+    # VPN_PASSWORD="$(eval "$GET_VPN_PASSWORD")"
+    # MFA_VALUE="$(prompt_2fa_method "${MFA_TYPE}")"
     # VPN connection command, should eventually result in $VPN_CONNECTED,
     # may need to be modified for VPN clients other than openconnect
 
-    # Connect based on your 2FA selection (see: $PUSH_OR_PIN for options)
+    # Connect based on your 2FA selection (see: $MFA_TYPE for options)
     # For anything else (non-duo) - you would provide your token (see: stoken)
-    echo -e "${VPN_PASSWORD}\n$(prompt_2fa_method ${PUSH_OR_PIN})\n" | \
+    # echo -e "$VPN_PASSWORD\n$MFA_VALUE\n" |
+    # echo -e "${VPN_PASSWORD}" | \
+
+    bash -c "$GET_VPN_PASSWORD" | \
       sudo "${VPN_EXECUTABLE}" \
-        --user="${VPN_USERNAME}" \
+        --pid-file="${VPN_PID_PATH}" \
         --interface="${VPN_INTERFACE}" \
-        --authgroup="${VPN_GROUP}" \
-        --script="${VPNC_SCRIPT_PATH}" \
+        --useragent="AnyConnect Darwin_x64 3.9.04053" \
+        --user="${VPN_USERNAME}" \
+        --passwd-on-stdin \
         --background \
-          "${VPN_HOST}" &> /dev/null
+          "${VPN_HOST}"
+     # &> /dev/null
 
     # while [ -ne "$VPN_TIMEOUT" 0 ]; do
     #   if eval "$VPN_CONNECTED"; do break; done
@@ -145,6 +167,7 @@ case "$1" in
     ;;
   disconnect)
     sudo /usr/bin/killall -INT openconnect
+    # sudo /usr/bin/killall -2 openconnect
     # Wait for disconnection so menu item refreshes instantly
     until [ -z "$(eval "$VPN_CONNECTED")" ]; do sleep 1; done
     osascript -e "display notification \"Disconnected\" with title \"${VPN_CONNECTION_LABEL}\""

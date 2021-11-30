@@ -1,46 +1,34 @@
-#!/bin/bash
-
-[[ -z ${GIT_NAME+x}     ]] && read -p "(gitconfig) Your Name: " GIT_NAME
-[[ -z ${GIT_EMAIL+x}    ]] && read -p "(gitconfig) Your Email: " GIT_EMAIL
-[[ -z ${GITHUB_USER+x}  ]] && read -p "(gitconfig) GitHub Username: " GITHUB_USER
-
-cat <<EOF
 [user]
-  name = $GIT_NAME
-  email = $GIT_EMAIL
+  name = Emmanuel Gomez
+  email = emmanuel@gomez.io
 [core]
-  excludesfile = $HOME/.gitignore_global
+  excludesfile = ~/.gitignore
   editor = mate -w
-[github]
-  user = $GITHUB_USER
-  # token = !security 2>&1 >/dev/null find-generic-password -gs \"Github API Token\" | ruby -e 'print $1 if STDIN.gets =~ /^password: \\\"(.*)\\\"$/'
-  token = !security 2>&1 >/dev/null find-generic-password -ws \"Github API Token\"
-# Use SSH instead of HTTPS for Github
-[url "ssh://git@github.com/"]
-  insteadOf = https://github.com/
+[init]
+  defaultBranch = main
 [merge]
   tool = opendiff
 [diff]
   tool = opendiff
 [difftool]
   prompt = false
-# [credential]
-#   helper = cache --timeout=3600
-# TODO: explore using `osxkeychain` as the default git credential helper
-#   helper = osxkeychain
+[credential]
+  helper = osxkeychain
+[gpg]
+  program = /opt/homebrew/bin/gpg
 [push]
   default = current
 [pull]
   default = current
   rebase = true
+[filter "lfs"]
+  smudge = git-lfs smudge -- %f
+  process = git-lfs filter-process
+  required = true
+  clean = git-lfs clean -- %f
 [rerere]
   enabled = true
   autoupdate = true
-[credential "https://git-codecommit.us-west-2.amazonaws.com"]
-  # thanks! https://stackoverflow.com/a/36456549
-  # helper = !security delete-internet-password -l "git-codecommit.us-west-2.amazonaws.com" || aws --region=us-west-2 --profile=impinj-shared-svcs-admin codecommit credential-helper $@
-  helper = !security delete-internet-password -l "git-codecommit.us-west-2.amazonaws.com" || aws --profile=impinj-shared-svcs-admin codecommit credential-helper $@
-  UseHttpPath = true
 [color]
   diff = auto
   status = auto
@@ -96,9 +84,25 @@ cat <<EOF
   dfnp  = !git --no-pager diff
   exec = '!exec '
   root = rev-parse --show-toplevel
-[filter "lfs"]
-  smudge = git-lfs smudge -- %f
-  process = git-lfs filter-process
-  required = true
-  clean = git-lfs clean -- %f
-EOF
+
+[github]
+  user = emmanuel
+  # token = !security 2>&1 >/dev/null find-generic-password -gs \"Github API Token\" | ruby -e 'print  if STDIN.gets =~ /^password: \\"(.*)\\"$/'
+  token = !security 2>&1 >/dev/null find-generic-password -ws \"Github API Token\"
+# Use SSH instead of HTTPS for Github
+[url "ssh://git@github.com/"]
+  insteadOf = https://github.com/
+# Use SSH instead of HTTPS for GitLab
+[url "ssh://git@gitlab.com/"]
+  insteadOf = https://gitlab.com/
+
+
+# Pelotech
+[includeIf "gitdir:**/github.com/pelotech/**/.git"]
+  path = ~/.gitconfig.pelotech
+# Pelotech: T-Mobile
+[includeIf "gitdir:**/gitlab.com/tmobile/**/.git"]
+  path = ~/.gitconfig.tmobile
+# Pelotech: Impinj (TODO: this applies to all repos in codecommit/us-west-2)
+[includeIf "gitdir:**/git-codecommit.us-west-2.amazonaws.com/**/.git"]
+  path = ~/.gitconfig.impinj

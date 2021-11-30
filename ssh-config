@@ -1,0 +1,29 @@
+Host *
+  AddKeysToAgent yes
+  UseKeychain yes
+  # ssh-keygen -o -a 100 -t ed25519 -f ~/.ssh/id_ed25519 -C "emmanuel@gomez.io"
+  IdentityFile ~/.ssh/id_ed25519
+  # ssh-keygen -o -a 100 -t ed25519 -f ~/.ssh/id_ed25519.pelotech -C "emmanuel@pelotech.com"
+  # IdentityFile ~/.ssh/id_ed25519.pelotech
+  # Keep any old key files if you want
+  IdentityFile ~/.ssh/id_rsa
+
+Host tmobile.gitlab.com
+  HostName gitlab.com
+  # User git
+  # ssh-keygen -o -a 100 -t ed25519 -f ~/.ssh/id_ed25519.tmobile -C "emmanuel.gomez123@t-mobile.com"
+  IdentityFile ~/.ssh/id_ed25519.tmobile
+  ServerAliveInterval 600
+  TCPKeepAlive yes
+  IPQoS=throughput
+  PreferredAuthentications publickey
+
+Host pelotech.github.com
+  HostName github.com
+  # User git
+  # ssh-keygen -o -a 100 -t ed25519 -f ~/.ssh/id_ed25519.liffft -C "emmanuel@liffft.com"
+  IdentityFile ~/.ssh/id_ed25519.liffft
+  ServerAliveInterval 600
+  TCPKeepAlive yes
+  IPQoS=throughput
+  PreferredAuthentications publickey
