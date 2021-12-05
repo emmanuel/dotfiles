@@ -60,7 +60,7 @@ VPN_PID_PATH="$HOME/.openconnect.pid"
 # 3.) Update your AnyConnect VPN host
 # VPN_HOST="vpn.domain.tld"
 # VPN_HOST="${VPN_HOST?:must be set}"
-VPN_HOST="general.vpn.t-mobile.com"
+VPN_HOST="west.vpn.t-mobile.com"
 
 # VPN_CONNECTION_LABEL="${VPN_CONNECTION_LABEL?:must be set}"
 VPN_CONNECTION_LABEL="T-Mobile"
