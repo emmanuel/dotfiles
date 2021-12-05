@@ -37,16 +37,14 @@ compinit
 
 function get-repo() {
   [[ -n "$TRACE" ]] && set -x
-  readonly repo_host_path=${1:?"The host/path must be specified."}
-  echo "repo_host_path=$repo_host_path"
 
+  readonly repo_host_path=${1:?"The host/path must be specified."}
   readonly srcdir="$GOPATH/src/$repo_host_path"
   readonly parentdir="$(dirname "$srcdir")"
-  # echo "srcdir=$srcdir"
-  # echo "parentdir=$parentdir"
 
   mkdir -p "$parentdir"
   git clone "https://$repo_host_path" "$srcdir"
+  echo "$srcdir" | pbcopy
 }
 
 function vpn-up() {

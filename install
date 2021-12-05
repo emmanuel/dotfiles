@@ -8,11 +8,15 @@ SCRIPT_DIR=~/.dotfiles
 echo "SCRIPT_DIR=${SCRIPT_DIR}"
 mkdir -p "${HOME}/Library/KeyBindings/"
 ln -sf "${SCRIPT_DIR}/DefaultKeyBinding.dict" "${HOME}/Library/KeyBindings/DefaultKeyBinding.dict"
+mkdir -p "${HOME}/.ssh"
 ln -sf "${SCRIPT_DIR}/ssh-config" "${HOME}/.ssh/config"
 ln -sf "${SCRIPT_DIR}/netrc" "${HOME}/.netrc"
 ln -sf "${SCRIPT_DIR}/zshenv" "${HOME}/.zshenv"
-ln -sf "${SCRIPT_DIR}/zshrc" "${HOME}/.zshrc"
+ln -sf "${SCRIPT_DIR}/zlogin" "${HOME}/.zlogin"
 ln -sf "${SCRIPT_DIR}/gitconfig" "${HOME}/.gitconfig"
+ln -sf "${SCRIPT_DIR}/gitconfig.impinj" "${HOME}/.gitconfig.impinj"
+ln -sf "${SCRIPT_DIR}/gitconfig.pelotech" "${HOME}/.gitconfig.pelotech"
+ln -sf "${SCRIPT_DIR}/gitconfig.tmobile" "${HOME}/.gitconfig.tmobile"
 ln -sf "${SCRIPT_DIR}/gitignore" "${HOME}/.gitignore"
 # Install TextMate configuration
 mkdir -p "${HOME}/Library/Application Support/TextMate/"
@@ -41,5 +45,9 @@ eval "$(brew shellenv)"
 brew analytics off
 
 brew bundle install --file="${SCRIPT_DIR}/Brewfile"
+
+sudo xcodebuild -license accept
+
+rustup-init
 
 # "${SCRIPT_DIR}/macos"
