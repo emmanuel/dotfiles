@@ -1,3 +1,10 @@
+# Sourced after `~/.zshenv`, per https://www.baeldung.com/linux/zsh-configuration-files
+
+# echo "#########################################################################"
+# echo "##################         IN ~/.zlogin             #####################"
+# echo "#########################################################################"
+
+
 # Check the window size after each command and, if necessary, update the
 # values of LINES and COLUMNS.
 # shopt -s checkwinsize
@@ -7,39 +14,37 @@
 # bind '"\e[A": history-search-backward'
 # bind '"\e[B": history-search-forward'
 
-bindkey '^[OH' beginning-of-line
-bindkey '^[OF' end-of-line
-bindkey '^[[3~' delete-char
+# bindkey '^[OH' beginning-of-line
+# bindkey '^[OF' end-of-line
+# bindkey '^[[3~' delete-char
+# See: https://unix.stackexchange.com/a/578966
 bindkey -e
+set -o emacs
 
-alias urlencode='python -c "import sys, urllib as ul; print ul.quote_plus(sys.stdin.read())"'
-alias urldecode='python -c "import sys, urllib as ul; print ul.unquote_plus(sys.stdin.read())"'
+alias urlencode='python3 -c "import sys, urllib.parse as ul; print(ul.quote_plus(sys.stdin.read()))"'
+alias urldecode='python3 -c "import sys, urllib.parse as ul; print(ul.unquote_plus(sys.stdin.read()))"'
 
 alias srvhttp='twistd -n web -p ${PORT:-8888} --path .'
 
+export SOPS_AGE_KEY='op://Private/private-key--pelotech-age/private-key'
+alias sops='/opt/homebrew/bin/op run -- /opt/homebrew/bin/sops'
+
+alias ls='eza -lag --header'
+
+export GPG_TTY=$(tty)
+
 # eval "$(brew shellenv)"
 eval "$(direnv hook zsh)"
+eval "$(hub alias -s)"
 
 # Make less more friendly for non-text input files, see lesspipe(1)
 [ -x /usr/bin/lesspipe ] && eval "$(SHELL=/bin/sh lesspipe)"
-
-# enable git completions; see: https://stackoverflow.com/a/54629182/5153603
-# zstyle ':completion:*:*:git:*' script ~/.zsh/completions/git-completion.bash
-# fpath=(~/.zsh/completions $fpath)
-# autoload -Uz compinit && compinit
-
-
-FPATH="$(brew --prefix)/share/zsh-completions:$FPATH"
-
-autoload -Uz compinit
-compinit
-
 
 function get-repo() {
   [[ -n "$TRACE" ]] && set -x
 
   readonly repo_host_path=${1:?"The host/path must be specified."}
-  readonly srcdir="$GOPATH/src/$repo_host_path"
+  readonly srcdir="${CODEPATH}/${repo_host_path}"
   readonly parentdir="$(dirname "$srcdir")"
 
   mkdir -p "$parentdir"
@@ -50,7 +55,7 @@ function get-repo() {
 function vpn-up() {
   # one
   # SPLIT_COMMAND=""
- 
+
   # if [[ "$1" == "split" ]]; then
   #   SPLIT_COMMAND="--script='$HOME/.local_config/vpnc-script.sh'"
   # fi
@@ -63,7 +68,7 @@ function vpn-up() {
   #   --useragent='AnyConnect Darwin_x64 3.9.04053' \
   #   --passwd-on-stdin \
   #   $OPENCONNECT_HOST
-  
+
   # NB: this assumes a unique item name in Bitwarden
   "~/Library/Application Support/xbar/plugins/vpn-status-v2.10s.sh" connect
 }

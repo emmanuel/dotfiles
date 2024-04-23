@@ -1,53 +1,48 @@
 #!/bin/bash
 
+set -x
 # SCRIPT_DIR="$(dirname "${BASH_SOURCE[0]}")"
 # SCRIPT_DIR="$(readlink "${BASH_SOURCE[0]}")"
 # SCRIPT_DIR="$( cd "$(dirname "${BASH_SOURCE[0]}")" ; pwd -P )"
 # SCRIPT_DIR="$(dirname "$(readlink "${BASH_SOURCE[0]}")")"
-SCRIPT_DIR=~/.dotfiles
+export XDG_CONFIG_HOME="${HOME}/.config"
+export XDG_DATA_HOME="${HOME}/.local/share"
+export XDG_CACHE_HOME="${HOME}/.cache"
+mkdir -p "${XDG_CONFIG_HOME}" "${XDG_DATA_HOME}" "${XDG_CACHE_HOME}"
+
+SCRIPT_DIR="${XDG_CONFIG_HOME}/dotfiles"
 echo "SCRIPT_DIR=${SCRIPT_DIR}"
 mkdir -p "${HOME}/Library/KeyBindings/"
 ln -sf "${SCRIPT_DIR}/DefaultKeyBinding.dict" "${HOME}/Library/KeyBindings/DefaultKeyBinding.dict"
+# Install ssh configuration
 mkdir -p "${HOME}/.ssh"
-ln -sf "${SCRIPT_DIR}/ssh-config" "${HOME}/.ssh/config"
-ln -sf "${SCRIPT_DIR}/netrc" "${HOME}/.netrc"
-ln -sf "${SCRIPT_DIR}/zshenv" "${HOME}/.zshenv"
-ln -sf "${SCRIPT_DIR}/zlogin" "${HOME}/.zlogin"
-ln -sf "${SCRIPT_DIR}/gitconfig" "${HOME}/.gitconfig"
-ln -sf "${SCRIPT_DIR}/gitconfig.impinj" "${HOME}/.gitconfig.impinj"
-ln -sf "${SCRIPT_DIR}/gitconfig.pelotech" "${HOME}/.gitconfig.pelotech"
-ln -sf "${SCRIPT_DIR}/gitconfig.tmobile" "${HOME}/.gitconfig.tmobile"
-ln -sf "${SCRIPT_DIR}/gitignore" "${HOME}/.gitignore"
-# Install TextMate configuration
-mkdir -p "${HOME}/Library/Application Support/TextMate/"
-ln -sf "${SCRIPT_DIR}/TextMate-KeyBindings.dict" "${HOME}/Library/Application Support/TextMate/KeyBindings.dict"
-ln -sf "${SCRIPT_DIR}/tm_properties" "${HOME}/.tm_properties"
+ln -sf "${SCRIPT_DIR}/ssh/config" "${HOME}/.ssh/config"
+# Install zsh configuration
+ln -sf "${SCRIPT_DIR}/zsh/zshenv" "${HOME}/.zshenv"
+ln -sf "${SCRIPT_DIR}/zsh/zlogin" "${HOME}/.zlogin"
+ln -sf "${SCRIPT_DIR}/zsh/zprofile" "${HOME}/.zprofile"
+ln -sf "${SCRIPT_DIR}/zsh/zshrc" "${HOME}/.zshrc"
+# Install Git configuration
+ln -sf "${SCRIPT_DIR}/git/gitconfig" "${HOME}/.gitconfig"
+ln -sf "${SCRIPT_DIR}/git/gitignore" "${HOME}/.gitignore"
 # Install iTerm2 configuration
-ln -sf "${SCRIPT_DIR}/com.googlecode.iterm2.plist" "${HOME}/Library/Preferences/com.googlecode.iterm2.plist"
-# Install Finicky.js configuration
-ln -sf "${SCRIPT_DIR}/finicky.js" "${HOME}/.finicky.js"
-# Install xbar configuration
-mkdir -p "${HOME}/Library/Application Support/xbar/plugins/"
-ln -sf "${SCRIPT_DIR}/xbar-plugins/vpn-status-v2.sh" "${HOME}/Library/Application Support/xbar/plugins/vpn-status-v2.10s.sh"
+# ln -sf "${SCRIPT_DIR}/com.googlecode.iterm2.plist" "${HOME}/Library/Preferences/com.googlecode.iterm2.plist"
 
-# ln -sf "${SCRIPT_DIR}/bashrc" "${HOME}/.bashrc"
-# ln -sf "${SCRIPT_DIR}/profile" "${HOME}/.profile"
-# ln -sf "${SCRIPT_DIR}/prompt_config.sh" "${HOME}/.prompt_config.sh"
-# [ -f "${HOME}/.gitconfig" ] || "${SCRIPT_DIR}/gitconfig.sh" > "${HOME}/.gitconfig"
+mkdir -p "${XDG_CONFIG_HOME}/aws-sso-cli"
+ln -sf "${SCRIPT_DIR}/aws-sso-cli/config.yaml" "${XDG_CONFIG_HOME}/aws-sso-cli/config.yaml"
+ln -sf "${SCRIPT_DIR}/aws-sso-cli/load-completions.sh" "${XDG_CONFIG_HOME}/aws-sso-cli/load-completions.sh"
 
-# Homebrew installed for Intel? Apple Silicon? If neither, then install
-[[ -f /usr/local/bin/brew ]] || \
-  [[ -f /opt/homebrew/bin/brew ]] || \
+# Homebrew installed for Apple Silicon? Intel? If neither, then install
+[[ -f /opt/homebrew/bin/brew ]] || [[ -f /usr/local/bin/brew ]] || \
   /usr/bin/sh -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 
-eval "$(brew shellenv)"
-
+eval "$(/opt/homebrew/bin/brew shellenv)"
 brew analytics off
 
 brew bundle install --file="${SCRIPT_DIR}/Brewfile"
 
-sudo xcodebuild -license accept
+# sudo xcodebuild -license accept
 
-rustup-init
+# rustup-init
 
 # "${SCRIPT_DIR}/macos"

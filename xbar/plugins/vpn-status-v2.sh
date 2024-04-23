@@ -11,7 +11,7 @@
 
 # Updated by: Emmanuel Gomez (2021-07-09)
 #   * Updated for use as an xbar plugin (replaced `bitbar.*` with `xbar.*`)
-#   * 
+#   *
 
 # Updated by: Ventz Petkov (8-31-18)
 #   * merged feature for token/pin input (ex: Duo/Yubikey/Google Authenticator) contributed by Harry Hoffman <hhoffman@ip-solutions.net>
@@ -60,7 +60,8 @@ VPN_PID_PATH="$HOME/.openconnect.pid"
 # 3.) Update your AnyConnect VPN host
 # VPN_HOST="vpn.domain.tld"
 # VPN_HOST="${VPN_HOST?:must be set}"
-VPN_HOST="west.vpn.t-mobile.com"
+# VPN_HOST="west.vpn.t-mobile.com"
+VPN_HOST="general.vpn.t-mobile.com"
 
 # VPN_CONNECTION_LABEL="${VPN_CONNECTION_LABEL?:must be set}"
 VPN_CONNECTION_LABEL="T-Mobile"
@@ -73,6 +74,8 @@ GET_VPN_USERNAME="security find-internet-password -l $VPN_HOST | grep acct | cut
 VPN_USERNAME="$(eval $GET_VPN_USERNAME)"
 
 # VPN_GROUP="${VPN_GROUP?:must be set}"
+GET_VPN_GROUP="security find-internet-password -l $VPN_HOST/group | grep acct | cut -d= -f2 | cut -d'\"' -f2"
+VPN_GROUP="$(eval $GET_VPN_GROUP)"
 
 # 5.) Push 2FA (ex: Duo), or Pin/Token (ex: Yubikey, Google Authenticator, TOTP)
 # MFA_TYPE="${MFA_TYPE?:must be set}"
@@ -90,7 +93,7 @@ VPN_USERNAME="$(eval $GET_VPN_USERNAME)"
 # ---
 
 # 6.) Create an encrypted password entry in your OS X Keychain:
-#      a.) Open "Keychain Access" and 
+#      a.) Open "Keychain Access" and
 #      b.) Click on "login" keychain (top left corner)
 #      c.) Click on "Passwords" category (bottom left corner)
 #      d.) From the "File" menu, select -> "New Password Item..."
@@ -150,6 +153,7 @@ case "$1" in
         --interface="${VPN_INTERFACE}" \
         --useragent="AnyConnect Darwin_x64 3.9.04053" \
         --user="${VPN_USERNAME}" \
+        --authgroup="${VPN_GROUP}" \
         --passwd-on-stdin \
         --background \
           "${VPN_HOST}"
