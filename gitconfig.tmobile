@@ -1,9 +1,0 @@
-[user]
-  name = Emmanuel Gomez
-  email = emmanuel.gomez123@t-mobile.com
-  # TODO: GPG key & commit signing (this one is Joachim's)
-  # signingkey = 0661E844DD0920C0
-  
-# Use distinct hostname (mapped in SSH config to diff SSH key & gitlab.com)
-[url "ssh://git@tmobile.gitlab.com/tmobile"]
-  insteadOf = https://gitlab.com/tmobile
