@@ -15,7 +15,7 @@
 
 [core]
   excludesfile = ~/.gitignore
-  editor = mate -w
+  editor = zed --wait
 
 [init]
   defaultBranch = main
@@ -28,6 +28,21 @@
 
 [difftool]
   prompt = false
+
+[mergetool "idea"]
+  cmd = idea merge \"$LOCAL\" \"$REMOTE\" \"$BASE\" \"$MERGED\"
+  trustExitCode = true
+
+[difftool "idea"]
+  cmd = idea diff \"$LOCAL\" \"$REMOTE\"
+
+[difftool "sourcetree"]
+	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
+	path =
+
+[mergetool "sourcetree"]
+	cmd = /Applications/Sourcetree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
+	trustExitCode = true
 
 [credential]
   helper = osxkeychain
