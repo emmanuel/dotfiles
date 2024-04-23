@@ -1,39 +1,61 @@
 [user]
   name = Emmanuel Gomez
   email = emmanuel@gomez.io
+  signingkey = ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIG7gnZJ+I0BvCHOU0CFWjC0qheQq0YY2PP3eYKDu6Qko
+
+[commit]
+  gpgsign = true
+
+[gpg]
+  format = ssh
+
+[gpg "ssh"]
+  program = "/Applications/1Password.app/Contents/MacOS/op-ssh-sign"
+  # program = /opt/homebrew/bin/gpg
+
 [core]
   excludesfile = ~/.gitignore
   editor = mate -w
+
 [init]
   defaultBranch = main
+
 [merge]
   tool = opendiff
+
 [diff]
   tool = opendiff
+
 [difftool]
   prompt = false
+
 [credential]
   helper = osxkeychain
-[gpg]
-  program = /opt/homebrew/bin/gpg
+
 [push]
   default = current
+  autoSetupRemote = true
+
 [pull]
   default = current
   rebase = true
+
 [filter "lfs"]
   smudge = git-lfs smudge -- %f
   process = git-lfs filter-process
   required = true
   clean = git-lfs clean -- %f
+
 [rerere]
   enabled = true
   autoupdate = true
+
 [color]
   diff = auto
   status = auto
   branch = auto
   interactive = auto
+
 [alias]
   st = status
   ci = commit
@@ -88,21 +110,17 @@
 [github]
   user = emmanuel
   # token = !security 2>&1 >/dev/null find-generic-password -gs \"Github API Token\" | ruby -e 'print  if STDIN.gets =~ /^password: \\"(.*)\\"$/'
+  # token = !security 2>&1 >/dev/null find-generic-password -ws \"Github API Token\"
   token = !security 2>&1 >/dev/null find-generic-password -ws \"Github API Token\"
+
 # Use SSH instead of HTTPS for Github
 [url "ssh://git@github.com/"]
   insteadOf = https://github.com/
+
 # Use SSH instead of HTTPS for GitLab
 [url "ssh://git@gitlab.com/"]
   insteadOf = https://gitlab.com/
 
-
-# Pelotech
-[includeIf "gitdir:**/github.com/pelotech/**/.git"]
-  path = ~/.gitconfig.pelotech
-# Pelotech: T-Mobile
-[includeIf "gitdir:**/gitlab.com/tmobile/**/.git"]
-  path = ~/.gitconfig.tmobile
-# Pelotech: Impinj (TODO: this applies to all repos in codecommit/us-west-2)
-[includeIf "gitdir:**/git-codecommit.us-west-2.amazonaws.com/**/.git"]
-  path = ~/.gitconfig.impinj
+# Use SSH instead of HTTPS for Bitbucket
+[url "ssh://git@bitbucket.org/"]
+  insteadOf = https://bitbucket.org/
