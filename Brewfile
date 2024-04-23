@@ -23,9 +23,9 @@ brew 'openconnect'
 brew 'bitwarden-cli'
 
 cask 'launchbar'
-cask 'textmate'
 cask 'iterm2'
 cask 'gitup'
+cask 'zed'
 cask 'visual-studio-code'
 cask 'intellij-idea-ce'
 
