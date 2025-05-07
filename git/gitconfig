@@ -1,6 +1,6 @@
 [user]
-  name = Emmanuel Gomez
-  email = emmanuel@gomez.io
+	name = Emmanuel Gomez
+	email = emmanuel@gomez.io
   signingkey = ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIG7gnZJ+I0BvCHOU0CFWjC0qheQq0YY2PP3eYKDu6Qko
 
 [commit]
@@ -24,10 +24,15 @@
   tool = opendiff
 
 [diff]
-  tool = opendiff
-
+    tool = kitty
+    guitool = kitty.gui
 [difftool]
-  prompt = false
+    prompt = false
+    trustExitCode = true
+[difftool "kitty"]
+    cmd = kitten diff $LOCAL $REMOTE
+[difftool "kitty.gui"]
+    cmd = kitten diff $LOCAL $REMOTE
 
 [mergetool "idea"]
   cmd = idea merge \"$LOCAL\" \"$REMOTE\" \"$BASE\" \"$MERGED\"
@@ -121,6 +126,17 @@
   dfnp  = !git --no-pager diff
   exec = '!exec '
   root = rev-parse --show-toplevel
+
+  # Difftastic aliases, so `git dlog` is `git log` with difftastic and so on.
+  dlog = -c diff.external=difft log --ext-diff
+  dshow = -c diff.external=difft show --ext-diff
+  ddiff = -c diff.external=difft diff
+  # `git log` with patches shown with difftastic.
+  dl = -c diff.external=difft log -p --ext-diff
+  # Show the most recent commit with difftastic.
+  ds = -c diff.external=difft show --ext-diff
+  # `git diff` with difftastic.
+  dft = -c diff.external=difft diff
 
 [github]
   user = emmanuel
