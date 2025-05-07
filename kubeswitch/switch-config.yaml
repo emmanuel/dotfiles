@@ -1,0 +1,31 @@
+kind: SwitchConfig
+version: v1alpha1
+refreshIndexAfter: 10h
+kubeconfigStores:
+  - kind: eks
+    id: uki-com-workloads--admin--us-east-1
+    config:
+      profile: uki-com-workloads:AdministratorAccess
+      region: us-east-1
+    cache:
+      kind: filesystem
+      config:
+        path: ~/.cache/kubeswitch
+  - kind: eks
+    id: uki-gov-workloads--admin--us-east-1
+    config:
+      profile: uki-gov-workloads:AdministratorAccess
+      region: us-gov-east-1
+    cache:
+      kind: filesystem
+      config:
+        path: ~/.cache/kubeswitch
+  - kind: eks
+    id: uki-gov-workloads--admin--us-west-1
+    config:
+      profile: uki-gov-workloads:AdministratorAccess
+      region: us-gov-west-1
+    cache:
+      kind: filesystem
+      config:
+        path: ~/.cache/kubeswitch

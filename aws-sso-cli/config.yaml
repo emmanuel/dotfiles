@@ -1,41 +1,67 @@
 SSOConfig:
-    Pelotech:
-        SSORegion: us-west-2
-        StartUrl: https://pelotech.awsapps.com/start
-        AuthUrlAction: open
-        DefaultRegion: us-west-2
-    UKI-COM:
-        DefaultRegion: us-east-1
-        SSORegion: us-west-2
-        StartUrl: https://uki.awsapps.com/start
-        AuthUrlAction: open
-    UKI-GOV:
-        DefaultRegion: us-gov-west-1
-        SSORegion: us-gov-west-1
-        StartUrl: https://start.us-gov-west-1.us-gov-home.awsapps.com/directory/uki
-        AuthUrlAction: open
-        Accounts: {} # optional block for specifying tags & overrides
-            # 077338169246: {}
-            #     Name: secops
-            # 060419713296: {}
-            #     Name: billing
-            # 004063834845: 
-            #     Name: workloads
-            #     DefaultRegion: us-gov-west-1
-            #     Tags:  # tags for all roles in the account
-            #         type: workloads
-            #         Icon: dollar
-            #         Color: red
-        #         Roles:
-        #             AdministratorAccess:
-        #                 Profile: <ProfileName>
-        #                 DefaultRegion: <AWS_DEFAULT_REGION>
-        #                 Tags:  # tags specific for this role (will override account level tags)
-        #                     <Key1>: <Value1>
-        #                     <Key2>: <Value2>
-        #                 Via: <Previous Role>  # optional, for role chaining
-        #                 SourceIdentity: <Source Identity>
-DefaultSSO: UKI-GOV
+  pelotech:
+    SSORegion: us-west-2
+    StartUrl: https://pelotech.awsapps.com/start
+    AuthUrlAction: open
+    DefaultRegion: us-west-2
+  uki-com:
+    DefaultRegion: us-east-1
+    SSORegion: us-west-2
+    StartUrl: https://uki.awsapps.com/start
+    AuthUrlAction: open
+    Accounts: # optional block for specifying tags & overrides
+      "975050203837":
+        Name: uki-com-secops
+        Tags: # tags for all roles in the account
+          type: secops
+          # Icon: dollar
+          Color: red
+      "548699988879":
+        Name: uki-com-billing
+        Tags: # tags for all roles in the account
+          type: billing
+          Icon: dollar
+          Color: red
+      "403726466342":
+        Name: uki-com-workloads
+        Tags: # tags for all roles in the account
+          type: workloads
+          Icon: dollar
+          Color: orange
+  uki-gov:
+    DefaultRegion: us-gov-west-1
+    SSORegion: us-gov-west-1
+    StartUrl: https://start.us-gov-west-1.us-gov-home.awsapps.com/directory/uki
+    AuthUrlAction: open
+    Accounts: # optional block for specifying tags & overrides
+      "077338169246":
+        Name: uki-gov-secops
+        Tags: # tags for all roles in the account
+          type: secops
+          # Icon: dollar
+          Color: red
+      "060419713296":
+        Name: uki-gov-billing
+        Tags: # tags for all roles in the account
+          type: billing
+          Icon: dollar
+          Color: red
+      "004063834845":
+        Name: uki-gov-workloads
+        Tags: # tags for all roles in the account
+          type: workloads
+          Icon: dollar
+          Color: orange
+    #         Roles:
+    #             AdministratorAccess:
+    #                 Profile: <ProfileName>
+    #                 DefaultRegion: <AWS_DEFAULT_REGION>
+    #                 Tags:  # tags specific for this role (will override account level tags)
+    #                     <Key1>: <Value1>
+    #                     <Key2>: <Value2>
+    #                 Via: <Previous Role>  # optional, for role chaining
+    #                 SourceIdentity: <Source Identity>
+DefaultSSO: uki-gov
 ConsoleDuration: 720
 CacheRefresh: 168
 Threads: 5
@@ -44,39 +70,38 @@ MaxRetry: 10
 # UrlAction: open
 UrlAction: open-url-in-container
 UrlExecCommand:
-    - /Applications/Firefox.app/Contents/MacOS/firefox
-    - "%s"
+  - /Applications/Firefox.app/Contents/MacOS/firefox
+  - "%s"
 ConfigProfilesUrlAction: open-url-in-container
 LogLevel: error
 HistoryLimit: 10
 HistoryMinutes: 1440
-ProfileFormat: "{{ .AccountIdPad }}:{{ .RoleName }}"
+ProfileFormat: "{{ .AccountName }}:{{ .RoleName }}"
 AccountPrimaryTag:
-    - AccountName
-    - AccountAlias
-    - Email
+  - AccountName
+  - AccountAlias
+  - Email
 PromptColors:
-    descriptionbgcolor: Turquoise
-    descriptiontextcolor: Black
-    inputbgcolor: DefaultColor
-    inputtextcolor: DefaultColor
-    prefixbackgroundcolor: DefaultColor
-    prefixtextcolor: Blue
-    previewsuggestionbgcolor: DefaultColor
-    previewsuggestiontextcolor: Green
-    scrollbarbgcolor: Cyan
-    scrollbarthumbcolor: LightGrey
-    selecteddescriptionbgcolor: DarkGray
-    selecteddescriptiontextcolor: White
-    selectedsuggestionbgcolor: DarkGray
-    selectedsuggestiontextcolor: White
-    suggestionbgcolor: Cyan
-    suggestiontextcolor: White
+  descriptionbgcolor: Turquoise
+  descriptiontextcolor: Black
+  inputbgcolor: DefaultColor
+  inputtextcolor: DefaultColor
+  prefixbackgroundcolor: DefaultColor
+  prefixtextcolor: Blue
+  previewsuggestionbgcolor: DefaultColor
+  previewsuggestiontextcolor: Green
+  scrollbarbgcolor: Cyan
+  scrollbarthumbcolor: LightGrey
+  selecteddescriptionbgcolor: DarkGray
+  selecteddescriptiontextcolor: White
+  selectedsuggestionbgcolor: DarkGray
+  selectedsuggestiontextcolor: White
+  suggestionbgcolor: Cyan
+  suggestiontextcolor: White
 ListFields:
-    - AccountIdPad
-    - AccountAlias
-    - RoleName
-    - Profile
-    - Expires
+  - AccountIdPad
+  - AccountAlias
+  - RoleName
+  - Profile
+  - Expires
 FullTextSearch: true
-
