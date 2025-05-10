@@ -39,3 +39,4 @@ export KREW_ROOT="${XDG_CONFIG_HOME}/krew"
 export PATH="$PATH:${KREW_ROOT}/bin"
 
 export PATH="$PATH:${HOME}/.deno/bin"
+. "$HOME/.cargo/env"
