@@ -3,4 +3,4 @@
 brew install --cask xbar
 # Install xbar configuration
 mkdir -p "${HOME}/Library/Application Support/xbar/plugins/"
-ln -sf "${SCRIPT_DIR}/xbar/plugins/vpn-status-v2.sh" "${HOME}/Library/Application Support/xbar/plugins/vpn-status-v2.10s.sh"
+ln -sf "${SCRIPT_DIR}/xbar/vpn-status-v2.sh" "${HOME}/Library/Application Support/xbar/plugins/vpn-status-v2.10s.sh"

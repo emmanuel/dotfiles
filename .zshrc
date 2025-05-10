@@ -1,3 +1,5 @@
+# Add deno completions to search path
+if [[ ":$FPATH:" != *":/Users/emmanuel/.zsh/completions:"* ]]; then export FPATH="/Users/emmanuel/.zsh/completions:$FPATH"; fi
 # echo "#########################################################################"
 # echo "##################         IN ~/.zshrc             ######################"
 # echo "#########################################################################"
@@ -111,7 +113,7 @@ source $ZSH/oh-my-zsh.sh
 # User configuration
 autoload -Uz +X bashcompinit && bashcompinit
 # autoload bashcompinit && bashcompinit
-# autoload -Uz compinit && compinit
+autoload -Uz compinit && compinit
 complete -C "${HOMEBREW_PREFIX}/bin/aws_completer" aws
 
 source "${XDG_CONFIG_HOME}/aws-sso-cli/load-completions.sh"
@@ -139,5 +141,10 @@ source "${HOMEBREW_PREFIX}/share/zsh-autosuggestions/zsh-autosuggestions.zsh"
 # For a full list of active aliases, run `alias`.
 #
 # Example aliases
-# alias zshconfig="mate ~/.zshrc"
-# alias ohmyzsh="mate ~/.oh-my-zsh"
+# alias zshconfig="zed ~/.zshrc"
+# alias ohmyzsh="zed ~/.oh-my-zsh"
+. "$HOME/.deno/env"
+
+export NVM_DIR="${XDG_CONFIG_HOME}/nvm"
+[ -s "/opt/homebrew/opt/nvm/nvm.sh" ] && \. "/opt/homebrew/opt/nvm/nvm.sh"  # This loads nvm
+[ -s "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm" ] && \. "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm"  # This loads nvm bash_completion

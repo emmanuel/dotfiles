@@ -3,7 +3,7 @@ brew 'brew-cask-completion'
 brew 'git'
 brew 'gpg'
 
-brew 'nodejs' # includes 'npm'
+brew 'nvm'
 brew 'go'
 brew 'rustup'
 

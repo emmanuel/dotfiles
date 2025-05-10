@@ -1,0 +1,20 @@
+{
+	"auths": {
+		"186985189796.dkr.ecr.us-east-1.amazonaws.com": {},
+		"ghcr.io": {},
+		"https://index.docker.io/v1/": {},
+		"registry.gitlab.com": {}
+	},
+	"credsStore": "osxkeychain",
+	"credHelpers": {
+		"403726466342.dkr.ecr.us-east-1.amazonaws.com": "ecr-login",
+		"602401143452.dkr.ecr.us-west-2.amazonaws.com": "ecr-login",
+		"public.ecr.aws": "ecr-login"
+	},
+	"currentContext": "orbstack",
+	"plugins": {
+		"-x-cli-hints": {
+			"enabled": "true"
+		}
+	}
+}
