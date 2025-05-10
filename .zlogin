@@ -34,6 +34,7 @@ alias ls='eza -lag --header'
 alias d='kitten diff'
 alias icat='kitten icat'
 alias rg='rg --hyperlink-format=kitty'
+alias dotfiles='/usr/bin/git --git-dir=$HOME/.dotfiles-git --work-tree=$HOME'
 
 export GPG_TTY=$(tty)
 
