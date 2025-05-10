@@ -1,0 +1,39 @@
+apiVersion: ""
+generated: "0001-01-01T00:00:00Z"
+repositories:
+- caFile: ""
+  certFile: ""
+  insecure_skip_tls_verify: false
+  keyFile: ""
+  name: kubeovn
+  pass_credentials_all: false
+  password: ""
+  url: https://kubeovn.github.io/kube-ovn/
+  username: ""
+- caFile: ""
+  certFile: ""
+  insecure_skip_tls_verify: false
+  keyFile: ""
+  name: bitnami
+  pass_credentials_all: false
+  password: ""
+  url: https://charts.bitnami.com/bitnami
+  username: ""
+- caFile: ""
+  certFile: ""
+  insecure_skip_tls_verify: false
+  keyFile: ""
+  name: crossplane-stable
+  pass_credentials_all: false
+  password: ""
+  url: https://charts.crossplane.io/stable
+  username: ""
+- caFile: ""
+  certFile: ""
+  insecure_skip_tls_verify: false
+  keyFile: ""
+  name: stakater
+  pass_credentials_all: false
+  password: ""
+  url: https://stakater.github.io/stakater-charts
+  username: ""

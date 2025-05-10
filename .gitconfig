@@ -34,21 +34,6 @@
 [difftool "kitty.gui"]
     cmd = kitten diff $LOCAL $REMOTE
 
-[mergetool "idea"]
-  cmd = idea merge \"$LOCAL\" \"$REMOTE\" \"$BASE\" \"$MERGED\"
-  trustExitCode = true
-
-[difftool "idea"]
-  cmd = idea diff \"$LOCAL\" \"$REMOTE\"
-
-[difftool "sourcetree"]
-	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
-	path =
-
-[mergetool "sourcetree"]
-	cmd = /Applications/Sourcetree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
-	trustExitCode = true
-
 [credential]
   helper = osxkeychain
 
@@ -76,6 +61,23 @@
   branch = auto
   interactive = auto
 
+[github]
+  user = emmanuel
+  # token = !security 2>&1 >/dev/null find-generic-password -gs \"Github API Token\" | ruby -e 'print  if STDIN.gets =~ /^password: \\"(.*)\\"$/'
+  # token = !security 2>&1 >/dev/null find-generic-password -ws \"Github API Token\"
+
+# Use SSH instead of HTTPS for Github
+[url "ssh://git@github.com/"]
+  insteadOf = https://github.com/
+
+# Use SSH instead of HTTPS for GitLab
+[url "ssh://git@gitlab.com/"]
+  insteadOf = https://gitlab.com/
+
+# Use SSH instead of HTTPS for Bitbucket
+[url "ssh://git@bitbucket.org/"]
+  insteadOf = https://bitbucket.org/
+
 [alias]
   st = status
   ci = commit
@@ -95,10 +97,6 @@
   b = branch
   ds = diff --stat=160,120
   dh1 = diff HEAD~1
-
-  lg = log -p
-  who = shortlog -s --
-  up = !sh -c 'git pull --rebase --prune && git log --pretty=format:\"%Cred%ae %Creset- %C(yellow)%s %Creset(%ar)\" HEAD@{1}..'
 
   # Divergence (commits we added and commits remote added)
   div = divergence
@@ -138,20 +136,6 @@
   # `git diff` with difftastic.
   dft = -c diff.external=difft diff
 
-[github]
-  user = emmanuel
-  # token = !security 2>&1 >/dev/null find-generic-password -gs \"Github API Token\" | ruby -e 'print  if STDIN.gets =~ /^password: \\"(.*)\\"$/'
-  # token = !security 2>&1 >/dev/null find-generic-password -ws \"Github API Token\"
-  token = !security 2>&1 >/dev/null find-generic-password -ws \"Github API Token\"
-
-# Use SSH instead of HTTPS for Github
-[url "ssh://git@github.com/"]
-  insteadOf = https://github.com/
-
-# Use SSH instead of HTTPS for GitLab
-[url "ssh://git@gitlab.com/"]
-  insteadOf = https://gitlab.com/
-
-# Use SSH instead of HTTPS for Bitbucket
-[url "ssh://git@bitbucket.org/"]
-  insteadOf = https://bitbucket.org/
+  lg = log -p
+  who = shortlog -s --
+  up = !sh -c 'git pull --rebase --prune && git log --pretty=format:\"%Cred%ae %Creset- %C(yellow)%s %Creset(%ar)\" HEAD@{1}..'
