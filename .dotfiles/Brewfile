@@ -32,6 +32,7 @@ cask 'docker'
 cask 'postgres-unofficial'
 cask 'postico'
 
+cask 'anki'
 cask 'thingsmacsandboxhelper'
 
 cask 'google-chrome'
@@ -43,7 +44,7 @@ cask 'webex'
 
 cask 'spotify'
 cask 'steam'
-cask 'vlc'
+cask 'iina'
 cask 'transmission'
 
 brew 'mas'
