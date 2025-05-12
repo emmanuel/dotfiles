@@ -23,7 +23,8 @@ eval "$(/opt/homebrew/bin/brew shellenv)"
 brew analytics off
 brew bundle install --file="${SCRIPT_DIR}/Brewfile"
 
-
 rustup-init
 NVM_DIR="${XDG_CONFIG_HOME}/nvm"
 mkdir "${NVM_DIR}"
+source "$(/opt/homebrew/bin/brew --prefix nvm)/nvm.sh"
+nvm use --lts
