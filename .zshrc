@@ -105,7 +105,10 @@ FPATH="${HOMEBREW_PREFIX}/share/zsh-completions:$FPATH"
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(colored-man-pages colorize git github brew macos docker kubectl helm aws npm)
+plugins=(
+    colored-man-pages
+    colorize
+)
 # echo "PLUGINS!!!! ${plugins}"
 # echo "sourcing $ZSH/oh-my-zsh.sh"
 source $ZSH/oh-my-zsh.sh
@@ -115,9 +118,7 @@ autoload -Uz +X bashcompinit && bashcompinit
 # autoload bashcompinit && bashcompinit
 autoload -Uz compinit && compinit
 complete -C "${HOMEBREW_PREFIX}/bin/aws_completer" aws
-
 source "${XDG_CONFIG_HOME}/aws-sso-cli/load-completions.sh"
-
 source "${HOMEBREW_PREFIX}/share/zsh-autosuggestions/zsh-autosuggestions.zsh"
 
 # export MANPATH="/usr/local/man:$MANPATH"
@@ -143,7 +144,7 @@ source "${HOMEBREW_PREFIX}/share/zsh-autosuggestions/zsh-autosuggestions.zsh"
 # Example aliases
 # alias zshconfig="zed ~/.zshrc"
 # alias ohmyzsh="zed ~/.oh-my-zsh"
-. "$HOME/.deno/env"
+[ -s "$HOME/.deno/env" ] && . "$HOME/.deno/env"
 
 export NVM_DIR="${XDG_CONFIG_HOME}/nvm"
 [ -s "/opt/homebrew/opt/nvm/nvm.sh" ] && \. "/opt/homebrew/opt/nvm/nvm.sh"  # This loads nvm
