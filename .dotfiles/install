@@ -24,7 +24,14 @@ brew analytics off
 brew bundle install --file="${SCRIPT_DIR}/Brewfile"
 
 rustup-init
+
+# NVM
+#
+# Configure nvm to use the current LTS release of Node as the system default
 NVM_DIR="${XDG_CONFIG_HOME}/nvm"
 mkdir "${NVM_DIR}"
 source "$(/opt/homebrew/bin/brew --prefix nvm)/nvm.sh"
+# Configure nvm to use the current LTS release of Node as the system default
 nvm use --lts
+node_lts_version=$(node --version)
+nvm alias default $node_lts_version

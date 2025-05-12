@@ -44,6 +44,8 @@ source <(hub alias -s)
 source <(switcher init zsh)
 source <(switch completion zsh)
 source <(helm completion zsh)
+
+alias k=kubectl
 alias s=switch
 
 # Make less more friendly for non-text input files, see lesspipe(1)
