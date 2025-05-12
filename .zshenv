@@ -17,26 +17,22 @@ export DOCKER_CONFIG="${XDG_CONFIG_HOME}/docker"
 export KUBECONFIG="${XDG_CONFIG_HOME}/kubectl/config"
 export KUBECACHEDIR="${XDG_CACHE_HOME}/kubectl"
 export NVM_DIR="${XDG_CONFIG_HOME}/nvm"
-# export NPM_CONFIG_PREFIX="${XDG_CONFIG_HOME}/npm"
 export AWS_CONFIG_FILE="${XDG_CONFIG_HOME}/aws/config"
 export AWS_DATA_PATH="${XDG_DATA_HOME}/aws/models"
 export AWS_SHARED_CREDENTIALS_FILE="${XDG_CACHE_HOME}/aws/credentials"
-# export AWS_WEB_IDENTITY_TOKEN_FILE="${XDG_CACHE_HOME}/aws/credentials"
 
 eval "$(/opt/homebrew/bin/brew shellenv)"
 
 export PATH="/opt/local/bin:$PATH"
 export PATH="${GOPATH}/bin:$PATH"
 export PATH="${CARGOPATH}/bin:$PATH"
-export PATH="${HOMEBREW_PREFIX}/opt/node@16/bin:$PATH"
-# export PATH="$(brew --prefix)/opt/coreutils/libexec/gnubin:$PATH"
-# export PATH="$(brew --prefix)/opt/gnu-sed/libexec/gnubin:$PATH"
-# export PATH="$(brew --prefix)/opt/grep/libexec/gnubin:$PATH"
-# export PATH="/Applications/Postgres.app/Contents/Versions/latest/bin:$PATH"
 export PATH="/Applications/IntelliJ IDEA.app/Contents/MacOS":$PATH
 export PATH="${XDG_CONFIG_HOME}/bin:$PATH"
 export KREW_ROOT="${XDG_CONFIG_HOME}/krew"
 export PATH="$PATH:${KREW_ROOT}/bin"
 
 export PATH="$PATH:${HOME}/.deno/bin"
-. "$HOME/.cargo/env"
+
+[ -s "$HOME/.deno/env" ] && . "$HOME/.deno/env"
+[ -s "$HOME/.cargo/env" ] && . "$HOME/.cargo/env"
+[ -s "/opt/homebrew/opt/nvm/nvm.sh" ] && \. "/opt/homebrew/opt/nvm/nvm.sh"  # This loads nvm
