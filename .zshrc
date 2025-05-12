@@ -146,6 +146,8 @@ source "${HOMEBREW_PREFIX}/share/zsh-autosuggestions/zsh-autosuggestions.zsh"
 # alias ohmyzsh="zed ~/.oh-my-zsh"
 [ -s "$HOME/.deno/env" ] && . "$HOME/.deno/env"
 
+[ -s "$HOME/.cargo/env" ] && . "$HOME/.cargo/env"
+
 export NVM_DIR="${XDG_CONFIG_HOME}/nvm"
 [ -s "/opt/homebrew/opt/nvm/nvm.sh" ] && \. "/opt/homebrew/opt/nvm/nvm.sh"  # This loads nvm
 [ -s "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm" ] && \. "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm"  # This loads nvm bash_completion
