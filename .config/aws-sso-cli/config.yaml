@@ -62,6 +62,7 @@ SSOConfig:
     #                 Via: <Previous Role>  # optional, for role chaining
     #                 SourceIdentity: <Source Identity>
 DefaultSSO: uki-gov
+AutoLogin: true
 ConsoleDuration: 720
 CacheRefresh: 168
 Threads: 5
