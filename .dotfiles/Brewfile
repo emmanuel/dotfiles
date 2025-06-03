@@ -1,58 +1,59 @@
-brew 'zsh-completions'
-brew 'brew-cask-completion'
-brew 'git'
-brew 'gpg'
-
-brew 'nvm'
-brew 'go'
-brew 'rustup'
-
-brew 'watch'
-brew 'tree'
-brew 'jq'
-brew 'direnv'
-
 brew 'aws-sso-cli'
-brew 'hub'
-brew 'kubernetes-cli'
 brew 'awscli'
-brew 'terraform'
-brew 'openconnect'
 brew 'bitwarden-cli'
+brew 'direnv'
+brew 'git'
+brew 'go'
+brew 'gpg'
+brew 'hub'
+brew 'jq'
+brew 'kubernetes-cli'
+brew 'mas'
+brew 'nvm'
+brew 'openconnect'
+brew 'rustup'
+brew 'terraform'
+brew 'tree'
+brew 'watch'
+brew 'zsh-completions'
+
 
 cask '1password'
-cask 'launchbar'
-cask 'iterm2'
-cask 'zed'
-cask 'visual-studio-code'
-cask 'intellij-idea'
-cask 'gitup'
-
+cask '1password-cli'
+cask 'anki'
+cask 'brave-browser'
+cask 'discord'
 cask 'docker'
+cask 'fellow'
+cask 'firefox'
+cask 'fork'
+cask 'gitup'
+cask 'google-chrome'
+cask 'iina'
+cask 'intellij-idea'
+cask 'iterm2'
+cask 'kitty'
+cask 'launchbar'
+cask 'lens'
+cask 'mongodb-compass'
+cask 'orbstack'
 cask 'postgres-unofficial'
 cask 'postico'
-
-cask 'anki'
-cask 'thingsmacsandboxhelper'
-
-cask 'google-chrome'
-cask 'firefox'
-
-cask 'discord'
-cask 'zoom'
-cask 'webex'
-
 cask 'spotify'
 cask 'steam'
-cask 'iina'
+cask 'thingsmacsandboxhelper'
 cask 'transmission'
+cask 'visual-studio-code'
+cask 'webex'
+cask 'whisky'
+cask 'zed'
+cask 'zoom'
 
-brew 'mas'
 
-mas 'Moom',                 id: 419330170
+mas '1Password for Safari', id: 1569813296
 mas 'Bitwarden',            id: 1352778147
-mas 'The Unarchiver',       id: 425424353
+mas 'Moom',                 id: 419330170
 mas 'Slack',                id: 803453959
+mas 'The Unarchiver',       id: 425424353
 mas 'Things',               id: 904280696
 mas 'Xcode',                id: 497799835
-mas '1Password for Safari', id: 1569813296
