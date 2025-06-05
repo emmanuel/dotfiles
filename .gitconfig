@@ -1,59 +1,7 @@
 [user]
-	name = Emmanuel Gomez
-	email = emmanuel@gomez.io
+  name = Emmanuel Gomez
+  email = emmanuel@gomez.io
   signingkey = ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIG7gnZJ+I0BvCHOU0CFWjC0qheQq0YY2PP3eYKDu6Qko
-
-[commit]
-  gpgsign = true
-
-[gpg]
-  format = ssh
-
-[gpg "ssh"]
-  program = "/Applications/1Password.app/Contents/MacOS/op-ssh-sign"
-  # program = /opt/homebrew/bin/gpg
-
-[core]
-  excludesfile = ~/.gitignore
-  editor = zed --wait
-
-[init]
-  defaultBranch = main
-
-[merge]
-  tool = opendiff
-
-[diff]
-    tool = kitty
-    guitool = kitty.gui
-[difftool]
-    prompt = false
-    trustExitCode = true
-[difftool "kitty"]
-    cmd = kitten diff $LOCAL $REMOTE
-[difftool "kitty.gui"]
-    cmd = kitten diff $LOCAL $REMOTE
-
-[credential]
-  helper = osxkeychain
-
-[push]
-  default = current
-  autoSetupRemote = true
-
-[pull]
-  default = current
-  rebase = true
-
-[filter "lfs"]
-  smudge = git-lfs smudge -- %f
-  process = git-lfs filter-process
-  required = true
-  clean = git-lfs clean -- %f
-
-[rerere]
-  enabled = true
-  autoupdate = true
 
 [color]
   diff = auto
@@ -61,10 +9,62 @@
   branch = auto
   interactive = auto
 
+[commit]
+  gpgsign = true
+
+[core]
+  excludesfile = ~/.gitignore
+  editor = zed --wait
+  pager = delta
+
+[diff]
+  tool = meld
+
+[difftool]
+  prompt = false
+  trustExitCode = true
+
+[difftool "meld"]
+  cmd = meld "$LOCAL" "$REMOTE"
+
+[filter "lfs"]
+  smudge = git-lfs smudge -- %f
+  process = git-lfs filter-process
+  required = true
+  clean = git-lfs clean -- %f
+
 [github]
   user = emmanuel
   # token = !security 2>&1 >/dev/null find-generic-password -gs \"Github API Token\" | ruby -e 'print  if STDIN.gets =~ /^password: \\"(.*)\\"$/'
   # token = !security 2>&1 >/dev/null find-generic-password -ws \"Github API Token\"
+
+[gpg]
+  format = ssh
+
+[gpg "ssh"]
+  program = "/Applications/1Password.app/Contents/MacOS/op-ssh-sign"
+
+[init]
+  defaultBranch = main
+
+[interactive]
+  diffFilter = delta --color-only
+
+[merge]
+  tool = meld
+  conflictstyle = zdiff3
+
+[pull]
+  default = current
+  rebase = true
+
+[push]
+  default = current
+  autoSetupRemote = true
+
+[rerere]
+  enabled = true
+  autoupdate = true
 
 # Use SSH instead of HTTPS for Github
 [url "ssh://git@github.com/"]
