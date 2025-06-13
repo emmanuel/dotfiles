@@ -3,6 +3,7 @@ brew 'awscli'
 brew 'bitwarden-cli'
 brew 'direnv'
 brew 'git'
+brew 'git-delta'
 brew 'go'
 brew 'gpg'
 brew 'hub'
@@ -24,6 +25,7 @@ cask 'anki'
 cask 'brave-browser'
 cask 'discord'
 cask 'docker'
+cask 'dropbox'
 cask 'fellow'
 cask 'firefox'
 cask 'fork'
@@ -35,6 +37,7 @@ cask 'iterm2'
 cask 'kitty'
 cask 'launchbar'
 cask 'lens'
+cask 'meld'
 cask 'mongodb-compass'
 cask 'orbstack'
 cask 'postgres-unofficial'
@@ -51,7 +54,6 @@ cask 'zoom'
 
 
 mas '1Password for Safari', id: 1569813296
-mas 'Bitwarden',            id: 1352778147
 mas 'Moom',                 id: 419330170
 mas 'Slack',                id: 803453959
 mas 'The Unarchiver',       id: 425424353
